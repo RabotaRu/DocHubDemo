@@ -1,0 +1,11 @@
+title: GitLab
+entity: rectangle
+technologies:
+  - GitLab
+aspects:
+  - gitlab.auth
+  - manifest.storage
+links:
+  - id: dochub.user
+    direction: '<--'
+    title: Развитие архитектуры

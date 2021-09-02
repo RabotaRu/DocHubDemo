@@ -1,0 +1,10 @@
+forms:
+  - entity:
+      - component
+    fields:
+      Autor:
+        title: Автор
+        required: true
+      contact:
+        title: Контакт
+        required: true

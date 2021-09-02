@@ -1,0 +1,12 @@
+title: OAuth\nmiddleware
+entity: component
+technologies:
+  - JavaScript
+  - VUE2
+links:
+  - id: dochub.router
+    title: OAuth токен
+    direction: -->
+  - id: gitlab.oauth
+    title: OAuth авторизация GitLab
+    direction: <-->

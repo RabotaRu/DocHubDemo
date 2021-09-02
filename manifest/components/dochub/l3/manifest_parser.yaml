@@ -1,0 +1,16 @@
+title: Manifest\nparser
+entity: component
+technologies:
+  - JavaScript
+  - VUE2
+  - Axios
+links:
+  - id: dochub.vuex
+    title: Комплексный манифест
+    direction: -->
+  - id: gitlab.api
+    title: Манифесты
+    direction: <--
+  - id: web.web
+    title: Манифесты
+    direction: <-l-
