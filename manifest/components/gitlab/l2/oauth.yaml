@@ -1,4 +1,4 @@
-title: GitLab\nАторизация
+title: GitLab Аторизация
 entity: component
 aspects:
   - gitlab.auth

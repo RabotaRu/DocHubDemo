@@ -1,0 +1,98 @@
+docs:
+    dochub_manual:
+        location: DocHub/Руководство
+        description: Руководство
+        type: markdown
+        source: introduction.md
+    dochub_introduction:
+        location: DocHub/Руководство/Введение
+        description: Введение
+        type: markdown
+        subjects:
+            - dochub.front
+        source: introduction.md
+    dochub_imports:
+      location: DocHub/Руководство/Импорт
+      description: Импорт манифестов
+      type: markdown
+      subjects:
+        - dochub.front
+      source: imports.md
+    dochub_namespaces:
+      location: DocHub/Руководство/Пространства имен
+      description: Пространства имен
+      type: markdown
+      subjects:
+        - dochub.front
+      source: namespaces.md
+    dochub_components:
+      location: DocHub/Руководство/Компоненты
+      description: Компоненты
+      type: markdown
+      subjects:
+        - dochub.front
+      source: components.md
+    dochub_contexts:
+      location: DocHub/Руководство/Контексты
+      description: Контексты
+      type: markdown
+      subjects:
+        - dochub.front
+      source: contexts.md
+    dochub_aspects:
+      location: DocHub/Руководство/Аспекты
+      description: Аспекты
+      type: markdown
+      subjects:
+        - dochub.front
+      source: aspects.md
+    dochub_docs:
+      location: DocHub/Руководство/Документы
+      description: Документы
+      type: markdown
+      subjects:
+        - dochub.front
+      source: docs.md
+    example_pml:
+      location: DocHub/Руководство/Документы/PlantUML
+      description: Пример документа PlantUML
+      type: PlantUML
+      subjects:
+        - dochub.front
+      source: examples/example.puml
+    example_swgr:
+      location: DocHub/Руководство/Документы/Swagger
+      description: Пример контракта Swagger
+      type: OpenAPI
+      subjects:
+        - dochub.front
+      source: examples/example.yaml
+    dochub_forms:
+      location: DocHub/Руководство/Формы
+      description: Формы
+      type: markdown
+      subjects:
+        - dochub.front
+      source: forms.md
+    dochub_technologies:
+      location: DocHub/Руководство/Технологии
+      description: Технологии
+      type: markdown
+      subjects:
+        - dochub.front
+      source: technologies.md
+    dochub_radar:
+      location: DocHub/Руководство/Техрадар
+      description: Техрадар
+      type: markdown
+      subjects:
+        - dochub.front
+      source: radar.md
+    config:
+      icon: settings
+      location: DocHub/Конфигурирование
+      description: Конфигурирование
+      type: markdown
+      subjects:
+        - dochub.front
+      source: config/config.md

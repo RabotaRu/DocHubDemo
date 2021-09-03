@@ -2,9 +2,6 @@ forms:
   - entity:
       - component
     fields:
-      Autor:
-        title: Автор
-        required: true
-      contact:
-        title: Контакт
+      source_file:
+        title: Файл
         required: true

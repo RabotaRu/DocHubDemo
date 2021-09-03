@@ -1,0 +1,57 @@
+technologies:                   # Описание технологического стека
+    sections:                   # Определение разделов стека
+        language:               # Идентификатор раздела
+            title: Языки программирования   # Название раздела
+        parsers:
+            title: Парсеры
+        tools:
+            title: Инструментарий
+        storages:
+            title: Хранилища
+        browsers:
+            title: Браузеры
+    items:                      # Перечисление технологий
+        JavaScript:             # Идентификатор технологии
+            aliases:            # Синонимы технологии
+                - js
+                - NodeJS
+            title: Супер-крутой язык программирования           # Название технологии
+            link: https://ru.wikipedia.org/wiki/JavaScript      # Ссылка на документацию
+            section: language   # Идентификатор секции технологии
+            status: adopt       # Статус технологии adopt / trial / assess / hold
+        Chrome:
+            aliases:
+                - Firefox
+                - Safari
+            section: browsers
+            status: adopt
+        VUEJS2:
+            aliases:
+                - VUE
+                - VUE2
+            section: tools
+            status: adopt
+        VUEX:
+            section: tools
+            status: adopt
+        Axios:
+            section: tools
+            status: adopt
+        Git:
+            section: tools
+            status: adopt
+        Markdown:
+            section: parsers
+            status: adopt
+        Swagger:
+            section: parsers
+            status: adopt
+        PluntUML:
+            section: parsers
+            status: adopt
+        GitLab:
+            section: storages
+            status: adopt
+        HTTP:
+            section: storages
+            status: adopt

@@ -1,5 +1,6 @@
-title: Рабочая\nобласть
+title: Рабочая область
 entity: component
+source_file: src/components/Root.vue
 technologies:
   - JavaScript
   - VUE2

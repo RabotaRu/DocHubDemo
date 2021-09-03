@@ -6,3 +6,4 @@ imports:
   - docs.yaml
   - namespaces.yaml
   - forms.yaml
+  - technologies.yaml
