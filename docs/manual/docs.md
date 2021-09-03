@@ -5,9 +5,7 @@
 * **[Swagger (OpenAPI)](#swagger)**  - язык описания интерфейсов для описания RESTful API, выраженных с помощью JSON. [Подробнее](https://swagger.io/);
 * **[Markdown](#markdown)** - облегчённый язык разметки, созданный с целью обозначения форматирования в простом тексте. [Подробнее](https://ru.wikipedia.org/wiki/Markdown)
 
-<br>
-Описание контекста в манифесте [/manifest/aspects.yaml](/manifest/aspects.yaml):
-
+Описание документов в манифесте [/docs/manual/manifest.yaml](/docs/manual/manifest.yaml):
 ```yaml
 docs:                                 # Документы
     dochub_manual:                    # Идентификатор документа
@@ -36,7 +34,7 @@ docs:                                 # Документы
 
 ## PlantUML
 
-Представляет собой исходные код на языке PluntUML.
+Представляет собой исходные код на языке PlantUML.
 
 ```text
 @startuml
@@ -123,7 +121,7 @@ paths:
 ```
 
 ### dochub-object
-Интегрирует в документ архитектурный объект. Например, код:
+Интегрирует в документ архитектурный объект. Например:
 ```html
 <dochub-object type="document" subject="example_swgr" style="border: #ccc 1px solid">
     [ТУТ ДОЛЖЕНА БЫТь SWAGGER КОНТРАКТ]
@@ -136,6 +134,7 @@ paths:
 * context
 * aspect
 * component
+* radar
 
 В свойстве "subject" указывается идентификатор объекта. 
 

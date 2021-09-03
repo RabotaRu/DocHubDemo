@@ -1,0 +1,16 @@
+docs:
+    dochub_conception:
+        location: DocHub/Концепция
+        description: Концепция
+        type: markdown
+        source: introduction.md
+    dochub_conception_introduction:
+        location: DocHub/Концепция/Введение
+        description: Введение
+        type: markdown
+        source: introduction.md
+    dochub_mindmap:
+        location: DocHub/Концепция/Карта памяти
+        description: Карта памяти
+        type: PlantUML
+        source: mindmap.puml

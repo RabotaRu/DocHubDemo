@@ -1,2 +1,3 @@
-imports:    # Импорт манифеста руководства пользователя
-  - ../docs/manual/manifest.yaml
+imports:
+  - ../docs/manual/manifest.yaml      # Импорт манифеста руководства пользователя
+  - ../docs/conception/manifest.yaml  # Импорт манифеста концепции
