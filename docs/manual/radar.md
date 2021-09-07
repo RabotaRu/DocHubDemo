@@ -8,16 +8,12 @@
 
 Радар может быть отражен как в сводной форме:
 
-<dochub-object type="radar" style="border: #ccc 1px solid">
-    [ТУТ ДОЛЖЕН БЫТь РАДАР]
-</dochub-object>
-
+![Технологический радар](@radar)
 
 Так и по отдельной секции. Например, по используемым инструментам:
 
-<dochub-object type="radar" subject="tools" style="border: #ccc 1px solid">
-    [ТУТ ДОЛЖЕН БЫТь РАДАР]
-</dochub-object>
+![Технологический радар](@radar/tools)
+
 
 
 

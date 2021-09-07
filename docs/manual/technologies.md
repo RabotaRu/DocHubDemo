@@ -51,9 +51,6 @@ links:
 Описанные технологии также являются архитектурными объектами и имеют карточки. 
 Например, карточка для JavaScript:
 
-<dochub-object type="technology" subject="JavaScript" style="border: #ccc 1px solid">
-    [ТУТ ДОЛЖЕНА БЫТь КАРТОЧКА ТЕХНОЛОГИИ]
-</dochub-object>
-
+![Карточка технологии](@technology/JavaScript)
 
 [Далее](/docs/dochub_radar)

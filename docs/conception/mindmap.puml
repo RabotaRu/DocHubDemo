@@ -1,41 +1,41 @@
 @startmindmap
-* DocHub
+* [[https://github.com/RabotaRu/DocHub DocHub]]
 ** Управление
 *** Управление архитектурой
-**** Манифесты компонентов
+**** [[/docs/dochub_components Манифесты компонентов]]
 ***** Инкрементальное развитие
-****** GitLab
-**** Манифесты контекстов
+****** [[https://about.gitlab.com/ GitLab]]
+**** [[/docs/dochub_contexts Манифесты контекстов]]
 ***** Инкрементальное развитие
-****** GitLab
-**** Манифесты аспектов
+****** [[https://about.gitlab.com/ GitLab]]
+**** [[/docs/dochub_aspects Манифесты аспектов]]
 ***** Инкрементальное развитие
-****** GitLab
+****** [[https://about.gitlab.com/ GitLab]]
 *** Управление технологиями
-**** Манифесты технологий
+**** [[/docs/dochub_technologies Манифесты технологий]]
 ***** Инкрементальное развитие
-****** GitLab
+****** [[https://about.gitlab.com/ GitLab]]
 *** Управление артефактами
-**** Манифесты артефактов
+**** [[/docs/dochub_docs Манифесты артефактов]]
 ***** Инкрементальное развитие
-****** GitLab
+****** [[https://about.gitlab.com/ GitLab]]
 ** Интеграция
 *** Внешние манифесты
 **** HTTP
 ** Публикация
 *** Автоматическая генерация
-**** Диаграммы контекстов
-***** PlantUML
-**** Диаграммы аспектов
-***** PlantUML
-**** Карточки объектов
-**** Технологический радар
-*** Пользовательские артефакты
-**** Диаграммы, схемы и т.д.
-***** PlantUML
-**** Документы
-***** Markdown
-****** Встраивание объектов DocHub
-**** API Контракты
-***** Swagger
+**** [[/docs/dochub_contexts Диаграммы контекстов]]
+***** [[https://plantuml.com/ PlantUML]]
+**** [[/docs/dochub_aspects Диаграммы аспектов]]
+***** [[https://plantuml.com/ PlantUML]]
+**** [[/docs/dochub_forms Карточки объектов]]
+**** [[/docs/dochub_radar Технологический радар]]
+*** [[/docs/dochub_docs Пользовательские артефакты]]
+**** [[/docs/dochub_docs#plantuml Диаграммы, схемы и т.д.]]
+***** [[https://plantuml.com/ PlantUML]]
+**** [[/docs/dochub_docs#markdown Документы]]
+***** [[https://ru.wikipedia.org/wiki/Markdown Markdown]]
+****** [[/docs/dochub_docs#markdown Встраивание объектов DocHub]]
+**** [[/docs/dochub_docs#swagger API Контракты]]
+***** [[https://swagger.io/ Swagger]]
 @endmindmap

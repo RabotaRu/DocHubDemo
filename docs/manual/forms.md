@@ -32,9 +32,7 @@ links:
 
 Теперь, в карточке компонента будут выводиться информация о файле реализации компонента:
 
-<dochub-object type="component" subject="dochub.workspace" style="border: #ccc 1px solid">
-    [ТУТ ДОЛЖЕНА БЫТь КАРТОЧКА ]
-</dochub-object>
+![Карточка компонента](@component/dochub.workspace) 
 
 
 [Далее](/docs/dochub_technologies)

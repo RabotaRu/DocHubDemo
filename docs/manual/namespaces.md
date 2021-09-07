@@ -14,9 +14,7 @@ dochub.front
 
 При построении диаграмм, компоненты группируются в области на основании пространства имен. Например:
 
-<dochub-object type="context" subject="dochub.c4level1">
-    [ТУТ ДОЛЖНА БЫТь СХЕМА]
-</dochub-object>
+![](@context/dochub.c4level1)
 
 На схеме отражены компоненты принадлежащие четырем пространствам имен: DocHub; GitLab; plantuml; web.
 

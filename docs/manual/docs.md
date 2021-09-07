@@ -22,15 +22,13 @@ docs:                                 # Документы
 идентификаторы. Если объект связан с документом, в его карточке он будет отображаться. Например, для объекта
 **dochub.front** карточка выглядит так:
 
-<dochub-object type="component" subject="dochub.front" style="border: #ccc 1px solid">
-    [ТУТ ДОЛЖЕНА БЫТь КАРТОЧКА КОМПОНЕНТА]
-</dochub-object>
+![Карточка компонента](@component/dochub.front)
 
 В разделе "Документы" можно найти ссылки на связанные с объектом документы.
 
 Для лучшего понимания возможностей документов разберем отдельно каждый тип:
 
-<dochub-anchor id="plantuml"/>
+![](@anchor/plantuml)
 
 ## PlantUML
 
@@ -58,11 +56,9 @@ docs:                                 # Документы
 
 Пример рендеринга документа:
 
-<dochub-object type="document" subject="example_pml" style="border: #ccc 1px solid">
-    [ТУТ ДОЛЖЕНА БЫТь КАРТОЧКА КОМПОНЕНТА]
-</dochub-object>
+![Документ](@document/example_pml)
 
-<dochub-anchor id="swagger"/>
+![](@anchor/swagger)
 
 ## Swagger (OpenAPI)
 
@@ -98,44 +94,40 @@ paths:
 
 Представление документа в DocHub:
 
-<dochub-object type="document" subject="example_swgr" style="border: #ccc 1px solid">
-    [ТУТ ДОЛЖЕНА БЫТь SWAGGER КОНТРАКТ]
-</dochub-object>
+![Swagger контракт](@document/example_swgr)
 
 
-<dochub-anchor id="markdown"/>
+![](@anchor/markdown)
 
 ## Markdown
 
 В Markdown документах включена поддержка HTML. Добавлены специальные теги DocHub, которые позволяются
 заметно расширить функциональность:
 
-### dochub-anchor
+### Навигационные якоря
 Позволяет создавать именованные якоря для "коротких" ссылок внутри документа. Например, код:
 ```html
-<dochub-anchor id="markdown"/>
+![](@anchor/markdown)
 ```
-создает якорь. Теперь на него можно сослаться из любой части документа:
+создает якорь "markdown". Теперь на него можно сослаться из любой части документа:
 ```markdown
 [Пример короткой ссылки](#markdown)
 ```
 
-### dochub-object
+### Встраиваемые объекты DocHub
 Интегрирует в документ архитектурный объект. Например:
 ```html
-<dochub-object type="document" subject="example_swgr" style="border: #ccc 1px solid">
-    [ТУТ ДОЛЖЕНА БЫТь SWAGGER КОНТРАКТ]
-</dochub-object>
+![Swagger контракт](@document/example_swgr)
 ```
 Результат можно посмотреть [выше](#swagger).
 
-В свойстве "type" указывается тиб объекта. Возможны значения:
-* document
-* context
-* aspect
-* component
-* radar
+Доступны следующие типы объектов: 
+* @document
+* @context
+* @aspect
+* @component
+* @radar 
 
-В свойстве "subject" указывается идентификатор объекта. 
+Через "/" указывается идентификатор объекта. 
 
 [Далее](/docs/dochub_forms)

@@ -34,8 +34,6 @@ aspects:            # Аспекты, которе реализует компо
 бы к смешению уровней и конфликту представления на диаграмме.
 
 Пример представления аспекта:
-<dochub-object type="aspect" subject="gitlab.auth" style="border: #ccc 1px solid">
-[ТУТ ДОЛЖЕНА БЫТь КАРТОЧКА АСПЕКТА]
-</dochub-object>
+![Карточка аспекта](@aspect/gitlab.auth)
 
 [Далее](/docs/dochub_docs)
