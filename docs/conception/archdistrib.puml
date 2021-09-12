@@ -15,9 +15,9 @@ group Обзор архитектуры
 end
 
 group Развитие концептуальной архитектуры
-    team_a -> repo_main: Checkout
-    team_a <-> repo_main: Развитие
-    team_a -> repo_main: Pull request
+    repo_a <- repo_main: Checkout
+    team_a <-> repo_a: Развитие
+    repo_a -> repo_main: Pull request
     team_b <- repo_main: Pull request
     team_b <- team_b: Review
     team_a <-> team_b: Коммуникации
