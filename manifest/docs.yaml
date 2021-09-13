@@ -1,3 +1,9 @@
 imports:
   - ../docs/manual/manifest.yaml      # Импорт манифеста руководства пользователя
   - ../docs/conception/manifest.yaml  # Импорт манифеста концепции
+docs:                                 # Каталог документов
+  dochub_welcome:
+    location: DocHub
+    description: DocHub
+    type: markdown
+    source: ../docs/welcome.md
