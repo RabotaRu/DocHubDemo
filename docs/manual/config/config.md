@@ -15,17 +15,20 @@
 |----------------------------------------|-----------------------------------------------------------------------------|
 | **VUE_APP_DOCHUB_ROOT_MANIFEST**       | URI в формате DocHub на корневой манифест.                                  |
 |                                        | Пример: manifest/root.yaml                                                  |
-| <br>                                   |                                                                             |
+|                                        |                                                                             |
+| **VUE_APP_DOCHUB_ROOT_DOCUMENT**       | Идентификатор главного документа (будет выводится на главной странице)      |
+|                                        | Пример: main_document  По умолчанию: dochub_welcome                         |
+|                                        |                                                                             |
 | **VUE_APP_DOCHUB_GITLAB_URL**          | Если используется GitLab в качестве хранилища, в переменной указывается     |
 |                                        | его URL адрес.                                                              |
 |                                        | Пример: https://gitlab.local/                                               |
-| <br>                                   |                                                                             |
+|                                        |                                                                             |
 | **VUE_APP_DOCHUB_APP_ID**              | Application ID GitLab.                                                      |
 |                                        | Пример: 21d85...350e5                                                       |
-| <br>                                   |                                                                             |
+|                                        |                                                                             |
 | **VUE_APP_DOCHUB_CLIENT_SECRET**       | Client secret GitLab.                                                       |
 |                                        | Пример: 437d0...0a102                                                       |
-| <br>                                   |                                                                             |
+|                                        |                                                                             |
 | **VUE_APP_DOCHUB_APPEND_DOCHUB_DOCS**  | Если "y", подключает манифест DocHab расположенный                          |
 |                                        | \[хост]/manifest/root.yaml                                                  |
 
