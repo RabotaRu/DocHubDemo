@@ -1,0 +1,23 @@
+components:
+  #***********************************************************
+  #                       C4Model L1
+  #***********************************************************
+  dochub.browser:
+    title: Браузер
+    entity: component
+    technologies:
+      - Chrome
+      - Firefox
+      - Safari
+  #***********************************************************
+  #                       C4Model L2
+  #***********************************************************
+  dochub.browser.localstorage:
+    title: LocalStorage
+    entity: component
+    technologies:
+      - Chrome
+      - Firefox
+      - Safari
+    aspects:
+      - dochub.manifest.storage

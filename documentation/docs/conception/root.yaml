@@ -1,0 +1,37 @@
+docs:
+    dochub.welcome:
+        type: markdown
+        source: introduction.md
+    dochub.conception:
+        location: DocHub
+        description: Концепция
+        type: markdown
+        source: introduction.md
+    dochub.conception.introduction:
+        description: Введение
+        type: markdown
+        source: introduction.md
+    dochub.mindmap:
+        description: Карта памяти
+        type: PlantUML
+        source: mindmap.puml
+    dochub.archver:
+        description: Управление версиями
+        type: PlantUML
+        source: archver.puml
+    dochub.archdistrib:
+        description: Распределенная архитектура
+        type: PlantUML
+        source: archdistrib.puml
+    dochub.archeco:
+        description: Структура экосистем
+        type: PlantUML
+        source: archeco.puml
+    dochub.archeco.proc:
+        description: Управление архитектурой экосистем
+        type: PlantUML
+        source: archeco_proc.puml
+    dochub.facade:
+        description: Управление архитектурными фасадами
+        type: PlantUML
+        source: facade.puml

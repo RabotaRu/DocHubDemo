@@ -1,0 +1,8 @@
+# Манифест описывающий сам DocHub
+imports:  # Подключение манифестов
+  - components/root.yaml
+  - aspects.yaml
+  - contexts.yaml
+  - namespaces.yaml
+  - forms.yaml
+  - technologies.yaml

@@ -1,6 +1,0 @@
-title: WEB          # Название компонента
-entity: rectangle   # Сущность компонента из PlantUML (https://plantuml.com/ru/deployment-diagram)
-technologies:       # Используемые технологии
-  - HTTP
-aspects:
-  - manifest.storage

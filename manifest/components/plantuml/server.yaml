@@ -1,6 +1,0 @@
-title: PlantUML render server
-entity: rectangle
-technologies:
-  - PluntUML
-aspects:
-  - dochub.umlrender

@@ -1,6 +1,0 @@
-title: GitLab Аторизация
-entity: component
-aspects:
-  - gitlab.auth
-technologies:
-  - GitLab

@@ -1,0 +1,7 @@
+[
+    $.services.{
+        "id": id,
+        "title": title,
+        "text": text
+    }
+]^(id)

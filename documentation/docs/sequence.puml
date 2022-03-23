@@ -1,0 +1,48 @@
+@startuml
+title Диаграмма взаимодействия DocHub
+actor "[[/architect/components/dochub.user Пользователь]]" as user
+participant "[[/architect/components/dochub.front DocHub]]" as DocHub
+participant "[[/architect/components/dochub.gitlab.api GitLab]]" as GitLab
+group Авторизация
+    user -> DocHub: Вход
+    DocHub -> DocHub: Авторизован?
+    DocHub -> GitLab: Redirect OAuth
+    GitLab -> GitLab: Авторизация
+    GitLab -> DocHub: Токен авторизации
+end
+group Загрузка манифестов
+    DocHub -> GitLab: Запрос корневого манифеста
+    database "[[/architect/components/dochub.gitlab.repository Репозиторий]]" as repo
+    GitLab <- repo: Корневой манифест
+    GitLab -> DocHub: Корневой манифест
+    DocHub -> DocHub: Обработка манифеста
+    group GitLab
+        DocHub -> GitLab: Запрос подключаемых\nманифестов через API
+        GitLab <- repo: Подключаемый манифест
+        DocHub <- GitLab: Подключаемый манифест
+    end
+    group HTTP
+        collections "WEB ресурсы" as web
+        DocHub -> web: Запрос подключаемых\nманифестов по HTTP
+        web -> DocHub: Подключаемый манифест
+    end
+    DocHub -> DocHub: Консолидация манифестов
+    DocHub -> DocHub: Построение навигационного дерева
+end
+group Использование
+    DocHub -> user: Рабочий стол с\nдеревом навигации
+    user -> DocHub: Выбор пункта меню\nиз дерева
+    DocHub -> DocHub: Анализ ссылки
+    group GitLab
+        DocHub -> GitLab: Запрос объекта через API
+        GitLab <- repo: Объект
+        GitLab -> DocHub: Объект
+    end
+    group HTTP
+        DocHub -> web: Запрос объекта по HTTP
+        web -> DocHub: Объект
+    end
+    DocHub -> DocHub: Рендер объекта
+    DocHub -> user: Карточка объекта
+end
+@enduml

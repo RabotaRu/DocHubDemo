@@ -1,0 +1,38 @@
+@startuml
+title Управление распределенной архитектурой
+actor "Команда А" as team_a
+actor "Команда B" as team_b
+participant "DocHub" as dochub
+database "Репозиторий\nкода\nкоманды A" as repo_a
+database "Репозиторий\nкода\nкоманды B" as repo_b
+database "Центральный\nрепозиторий\nархитектуры" as repo_main
+group Обзор архитектуры
+    dochub <- repo_main: Как будет
+    dochub <- repo_b: Как есть
+    dochub <- repo_a: Как есть
+    team_a <- dochub: Артефакты
+    team_b <- dochub: Артефакты
+end
+
+group Развитие концептуальной архитектуры
+    repo_a <- repo_main: Checkout
+    team_a <-> repo_a: Развитие
+    repo_a -> repo_main: Pull request
+    team_b <- repo_main: Pull request
+    team_b <- team_b: Review
+    team_a <-> team_b: Коммуникации
+    team_b -> repo_main: Approve
+    repo_main -> repo_main: Merge
+end
+
+group Развитие архитектуры "как есть"
+    team_b -> repo_b: Checkout
+    team_b <-> repo_b: Развитие
+    team_b -> repo_b: Pull request
+    team_b <- repo_b: Pull request
+    team_b <- team_b: Review
+    team_b -> repo_b: Approve
+    repo_b -> repo_b: Merge
+end
+
+@enduml

@@ -1,0 +1,11 @@
+components:
+  #***********************************************************
+  #                       C4Model L1
+  #***********************************************************
+  dochub.web:
+    title: WEB   
+    entity: component
+    technologies:
+      - HTTP
+    aspects:
+      - dochub.manifest.storage

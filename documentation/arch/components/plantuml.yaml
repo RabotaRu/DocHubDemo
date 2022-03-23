@@ -1,0 +1,29 @@
+components:
+  #***********************************************************
+  #                       C4Model L1
+  #***********************************************************
+  dochub.plantuml:
+      title: PlantUML render server
+      entity: component
+      technologies:
+      - PluntUML
+      aspects:
+      - dochub.umlrender    
+  #***********************************************************
+  #                        C4Model L2
+  #***********************************************************
+  dochub.plantuml.jar:
+    title: plantuml.jar
+    entity: component
+    technologies:
+      - PluntUML
+    aspects:
+      - dochub.umlrender
+    links:
+      - id: dochub.plantuml.dot
+        direction: <-->
+  dochub.plantuml.dot:
+    title: Graphviz
+    entity: component
+    technologies:
+      - graphviz

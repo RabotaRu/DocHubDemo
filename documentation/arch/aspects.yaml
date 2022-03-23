@@ -1,0 +1,38 @@
+aspects:   # Архитектурные аспекты
+    dochub.git.client:
+        title: Развитие репы
+        location: DocHub/GitLab/Git-клиент
+    dochub.gitlab.auth:
+        title: Авторизация GitLab
+        location: DocHub/GitLab/Авторизация
+    dochub.umlrender:
+        title: Рендеринг PlantUML
+        location: DocHub/Рендеринг/PlantUML
+    dochub.contexts:
+        title: Рендеринг контекстов
+        location: DocHub/Рендеринг/Контексты
+    dochub.aspects:
+        title: Рендеринг аспектов
+        location: DocHub/Рендеринг/Аспекты
+    dochub.docs:
+        title: Рендеринг документов
+        location: DocHub/Рендеринг/Документы
+    dochub.navigation:
+        title: Навигация по архитектуре
+        location: DocHub/Навигация по архитектуре
+    dochub.radar:
+        title: Технологический радар
+        location: DocHub/Технологический радар
+    dochub.cache:
+        title: Кэш данных
+        location: DocHub/Кэш
+    dochub.manifest.storage:
+        title: Хранилище манифестов
+        location: DocHub/Хранилище манифестов
+    dochub.manifest.parsing:
+        title: Парсинг манифестов
+        location: DocHub/Парсинг манифестов
+    dochub.dataset:
+        title: Источники данных
+        location: DocHub/Источники данных
+

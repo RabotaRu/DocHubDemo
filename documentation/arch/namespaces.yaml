@@ -1,0 +1,14 @@
+# Манифест описывающий пространство имен dochub и gitlab
+namespaces:
+    dochub: # Идентификатор области имен
+        title: DocHub # Название области имен. Будет отражаться на схемах
+    gitlab:
+        title: GitLab
+    git:
+        title: Клиент git
+    manifest:
+        title: Манифесты
+    plantuml:
+          title: PlantUML сервер
+    web:
+          title: WEB-ресурсы

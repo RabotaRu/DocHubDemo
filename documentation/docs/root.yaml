@@ -1,0 +1,4 @@
+# Манифест описывающий сам DocHub
+imports:  # Подключение манифестов
+  - conception/root.yaml
+  - manual/root.yaml

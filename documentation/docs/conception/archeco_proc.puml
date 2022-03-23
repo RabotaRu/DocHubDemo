@@ -1,0 +1,29 @@
+@startuml
+title "Развитие архитектуры экосистем"
+participant "Компания A" as company_a
+participant "DocHub A" as dochub_a
+participant "Компания B" as company_b
+participant "DocHub B" as dochub_b
+database "Branch\nCompany A" as rb_company_a
+database "Branch\nCompany B" as rb_company_b
+database "Branch\nmaster" as rb_master
+
+group Обзор архитектуры
+    dochub_a <- rb_company_a : Манифесты
+    dochub_a <- rb_master : Манифесты
+    company_a <- dochub_a : Артефакты
+
+    dochub_b <- rb_company_b : Манифесты
+    dochub_b <- rb_master : Манифесты
+    company_b <- dochub_b : Артефакты
+end
+
+group Развитие архитектуры
+    rb_company_a <- rb_master : Checkout
+    company_a <-> rb_company_a : Развитие
+    rb_company_a -> rb_master : Pull request
+    rb_master -> rb_master : Merge
+    rb_company_a <- rb_master : Fetch
+end
+
+@enduml

@@ -1,8 +1,0 @@
-title: GitLab API
-entity: component
-technologies:
-  - GitLab
-links:
-  - id: gitlab.repository
-    direction: <--
-    title: Файлы манифестов, документы

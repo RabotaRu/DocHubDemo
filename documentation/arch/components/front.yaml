@@ -1,0 +1,244 @@
+components:
+  #***********************************************************
+  #                       C4Model L1
+  #***********************************************************
+  dochub.front:             # Идентификатор компонента
+    title: DocHub           # Название компонента
+    entity: component       # Сущность компонента из PlantUML (https://plantuml.com/ru/deployment-diagram)
+    technologies:           # Используемые технологии
+      - JavaScript
+      - VUEJS2
+      - Chrome
+      - Firefox
+      - Safari
+    aspects:                # Аспекты, которе реализует компонент
+      - dochub.gitlab.auth
+      - dochub.manifest.parsing
+      - dochub.contexts
+      - dochub.aspects
+      - dochub.docs
+      - dochub.radar
+      - dochub.navigation
+      - dochub.dataset
+    links:                  # Зависимость компонента от других компонентов
+      - id: dochub.gitlab   # Идентификатор компонента
+        direction: '<--'
+        title: Манифесты и документы
+      - id: dochub.plantuml
+        direction: '-->'
+        title: PlantUML
+      - id: dochub.plantuml
+        direction: '<-'
+        title: Схема SVG
+      - id: dochub.web
+        direction: '<--'
+        title: Манифесты и документы
+  #***********************************************************
+  #                       C4Model L2
+  #***********************************************************
+  dochub.front.spa:
+    title: SPA приложение DocHub
+    entity: component
+    technologies:
+      - JavaScript
+      - VUEJS2
+      - Chrome
+      - Firefox
+      - Safari
+    aspects:
+      - dochub.gitlab.auth
+      - dochub.manifest.parsing
+      - dochub.contexts
+      - dochub.aspects
+      - dochub.docs
+      - dochub.navigation
+      - dochub.radar
+      - dochub.dataset
+    links:
+      - id: dochub.browser.localstorage
+        title: Кэш манифестов, cookies
+        direction: <-->
+      - id: dochub.gitlab.api
+        direction: <--
+        title: Манифесты, документы
+      - id: dochub.gitlab.oauth
+        direction: -->
+        title: Авторизация GitLab
+      - id: dochub.gitlab.oauth
+        direction: <--
+        title: Токен авторизации
+      - id: dochub.web
+        direction: <---
+        title: Манифесты, документы
+      - id: dochub.plantuml.jar
+        direction: ->
+        title: PlantUML
+      - id: dochub.plantuml.jar
+        direction: <-
+        title: SVG
+  #***********************************************************
+  #                       C4Model L3
+  #***********************************************************
+  dochub.front.spa.user_interface:
+    title: Интерфейс пользователя
+    entity: actor
+    technologies:
+      - JavaScript
+      - VUE2
+    links:
+      - id: dochub.front.spa.router
+        direction: <-->
+  dochub.front.spa.vue2: 
+    title: VUE2
+    entity: component
+    technologies:
+      - JavaScript
+      - VUE2
+  dochub.front.spa.router:
+    title: VUE Router
+    entity: component
+    links:
+      - id: dochub.front.spa.vue2
+  dochub.front.spa.vuex: 
+    title: VUEX
+    entity: component
+    technologies:
+      - JavaScript
+      - VUE2
+      - VUEX
+  dochub.front.spa.menu:
+    title: DocHub меню
+    entity: component
+    technologies:
+      - JavaScript
+      - VUE2
+    links:
+      - id: dochub.front.spa.router
+        title: Представление
+        direction: -->
+      - id: dochub.front.spa.jsonata
+        title: Меню
+        direction: <--
+  dochub.front.spa.workspace:
+    title: Рабочая область
+    entity: component
+    source_file: src/components/Root.vue
+    technologies:
+      - JavaScript
+      - VUE2
+    links:
+      - id: dochub.front.spa.router
+        title: Представление
+        direction: -->
+  dochub.front.spa.jsonata:
+    title: JSONata
+    entity: component
+    technologies:
+      - JavaScript
+      - VUE2
+    links:
+      - id: dochub.front.spa.vuex
+        title: Комплексный манифест
+        direction: <--    
+  dochub.front.spa.manifest_parser:
+    title: Manifest parser
+    entity: component
+    technologies:
+      - JavaScript
+      - VUE2
+      - Axios
+    links:
+      - id: dochub.front.spa.vuex
+        title: Комплексный манифест
+        direction: -->
+      - id: dochub.front.spa.manifest_data
+        direction: <--
+  dochub.front.spa.manifest_data:
+    title: Данные манифеста
+    entity: interface
+    technologies:
+      - Axios
+  dochub.front.spa.blank:
+    title: Карточка объекта
+    entity: component
+    technologies:
+      - JavaScript
+      - VUE2
+    links:
+      - id: dochub.front.spa.workspace
+        title: Представление
+        direction: -->
+      - id: dochub.front.spa.jsonata
+        title: Сводка, размещение и т.п.
+        direction: <--    
+      - id: dochub.front.spa.dataset
+        title: Данные
+        direction: <--    
+  dochub.front.spa.blank.radar:
+    title: Тех. радар
+    entity: component
+    technologies:
+      - JavaScript
+      - VUE2
+  dochub.front.spa.blank.aspect:
+    title: Карточка аспекта
+    entity: component
+    technologies:
+      - JavaScript
+      - VUE2
+  dochub.front.spa.blank.component: 
+    title: Карточка компонента
+    entity: component
+    technologies:
+      - JavaScript
+      - VUE2
+  dochub.front.spa.blank.context: 
+    title: Карточка контекста
+    entity: component
+    technologies:
+      - JavaScript
+      - VUE2
+  dochub.front.spa.blank.doc:
+    title: Карточка документа
+    entity: component
+    technologies:
+      - JavaScript
+      - VUE2
+  dochub.front.spa.blank.doc.markdown:
+    title: Markdown
+    entity: component
+    technologies:
+      - JavaScript
+      - VUE2
+      - Markdown    
+  dochub.front.spa.blank.doc.swagger:
+    title: Swagger
+    entity: component
+    technologies:
+      - JavaScript
+      - VUE2
+      - Markdown
+  dochub.front.spa.blank.doc.table:
+    title: Таблицы
+    entity: component
+    technologies:
+      - JavaScript
+      - VUE2
+  dochub.front.spa.dataset:
+    title: Источники данных
+    entity: component
+    technologies:
+      - JavaScript
+      - VUE2
+      - JSONata
+    links:
+      - id: dochub.front.spa.vuex
+        title: Данные
+      - id: dochub.front.spa.dataset_http
+        title: Данные
+        direction: <-
+  dochub.front.spa.dataset_http:
+    title: Внешние данные
+    entity: interface
+    technologies:
+      - Axios

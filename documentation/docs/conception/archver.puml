@@ -1,0 +1,24 @@
+@startuml
+title "Инкрементальное развитие архитектуры"
+
+package "Центральный репозиторий" {
+    database master as master
+    database branch1 as branch1
+    database branch2 as branch2
+}
+
+master --> branch1: Checkout
+master --> branch2: Checkout
+master <-- branch1: Pull request
+master <-- branch2: Pull request
+
+actor Architect1 as architect1
+actor Architect2 as architect2
+
+architect1 <-up-> branch1: Developing
+architect2 <-up-> branch2: Developing
+
+
+architect1 <-up-> master: Review
+architect2 <-up-> master: Review
+@enduml

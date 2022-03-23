@@ -1,0 +1,42 @@
+contexts:   # Контексты представления архитектурных компонентов
+    dochub:                                 # Идентификатор контекста
+        title: Общая архитектура DocHub     # Название контекста
+        location: DocHub                    # Размещение документа в дереве навигации
+        components:                         # Компоненты входящие в контекст
+            - dochub.front
+            - dochub.user
+            - dochub.plantuml
+            - dochub.gitlab
+            - dochub.web
+    dochub.front:
+        title: Контейнерная архитектура DocHub
+        location: DocHub/Контейнерная архитектура
+        components:
+            - dochub.browser.localstorage
+            - dochub.front.spa
+            - dochub.gitlab.api
+            - dochub.gitlab.oauth
+            - dochub.gitlab.repository
+            - dochub.gitlab.gitclient
+            - dochub.plantuml.jar
+            - dochub.plantuml.dot
+            - dochub.web
+    dochub.front.spa:
+        title: Компонентная архитектура DocHub
+        location: DocHub/Компонентная архитектура
+        components:
+            - dochub.front.spa.*
+    dochub.front.spa.blank:
+        title: Карточка объекта
+        components:
+            - dochub.front.spa.blank.*
+    dochub.front.spa.blank.doc:            
+        title: Документ
+        components:
+            - dochub.front.spa.blank.doc.*
+    dochub.sequence:
+        title: Диаграмма взаимодействия DocHub
+        icon: settings_ethernet
+        location: DocHub/Диаграмма взаимодействия
+        uml: ../docs/sequence.puml
+

@@ -1,0 +1,8 @@
+/* Отбираем все контексты */
+[contexts.$spread().(
+    {
+        "id": $keys()[0],
+        "title": *.title,
+        "link": "/architect/contexts/" & $keys()[0]
+    }
+)]^(title)

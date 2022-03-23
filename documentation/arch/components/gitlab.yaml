@@ -1,0 +1,51 @@
+components:
+  #***********************************************************
+  #                       C4Model L1
+  #***********************************************************
+  dochub.gitlab:
+    title: GitLab
+    entity: component
+    technologies:
+      - GitLab
+    aspects:
+      - dochub.gitlab.auth
+      - dochub.manifest.storage
+    links:
+      - id: dochub.user
+        direction: '<--'
+        title: Развитие архитектуры        
+  dochub.gitlab.api:
+    title: GitLab API
+    entity: component
+    technologies:
+      - GitLab
+    links:
+      - id: dochub.gitlab.repository
+        direction: <--
+        title: Файлы манифестов, документы
+  #***********************************************************
+  #                       C4Model L2
+  #***********************************************************
+  dochub.gitlab.repository:
+    title: Репозиторий
+    entity: database
+    aspects:
+      - dochub.manifest.storage  
+  dochub.gitlab.oauth:
+    title: GitLab Аторизация
+    entity: component
+    aspects:
+      - dochub.gitlab.auth
+    technologies:
+      - GitLab  
+  dochub.gitlab.gitclient:
+    title: git client
+    entity: component
+    technologies:
+      - Git
+    aspects:
+      - dochub.git.client
+    links:
+      - id: dochub.gitlab.api
+        direction: <-l->
+        title: Развитие

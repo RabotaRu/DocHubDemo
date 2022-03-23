@@ -1,0 +1,41 @@
+@startmindmap
+* [[https://github.com/RabotaRu/DocHub DocHub]]
+** Управление
+*** Управление архитектурой
+**** [[/docs/dochub.components Манифесты компонентов]]
+***** Инкрементальное развитие
+****** [[https://about.gitlab.com/ GitLab]]
+**** [[/docs/dochub.contexts Манифесты контекстов]]
+***** Инкрементальное развитие
+****** [[https://about.gitlab.com/ GitLab]]
+**** [[/docs/dochub.aspects Манифесты аспектов]]
+***** Инкрементальное развитие
+****** [[https://about.gitlab.com/ GitLab]]
+*** Управление технологиями
+**** [[/docs/dochub.technologies Манифесты технологий]]
+***** Инкрементальное развитие
+****** [[https://about.gitlab.com/ GitLab]]
+*** Управление артефактами
+**** [[/docs/dochub.docs Манифесты артефактов]]
+***** Инкрементальное развитие
+****** [[https://about.gitlab.com/ GitLab]]
+** Интеграция
+*** Внешние манифесты
+**** HTTP
+** Публикация
+*** Автоматическая генерация\nартефактов
+**** [[/docs/dochub.contexts Диаграммы контекстов]]
+***** [[https://plantuml.com/ PlantUML]]
+**** [[/docs/dochub.aspects Диаграммы аспектов]]
+***** [[https://plantuml.com/ PlantUML]]
+**** [[/docs/dochub.forms Карточки объектов]]
+**** [[/docs/dochub.radar Технологический радар]]
+*** [[/docs/dochub.docs Пользовательские артефакты]]
+**** [[/docs/dochub.docs#plantuml Диаграммы, схемы и т.д.]]
+***** [[https://plantuml.com/ PlantUML]]
+**** [[/docs/dochub.docs#markdown Документы]]
+***** [[https://ru.wikipedia.org/wiki/Markdown Markdown]]
+****** [[/docs/dochub.docs#markdown Встраивание объектов DocHub]]
+**** [[/docs/dochub.docs#swagger API Контракты]]
+***** [[https://swagger.io/ Swagger]]
+@endmindmap

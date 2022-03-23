@@ -1,0 +1,20 @@
+@startuml
+title "Управление архитектурным фасадом"
+
+actor "    Внешний\nпользователь" as user
+
+rectangle "Компания" {
+    cloud WEB {
+        rectangle DocHub as dochub
+        rectangle "Facade\nmanifests" as static
+    }
+    cloud Repository {
+        database "Facade\nbranch" as facade_branch
+    }
+}
+
+user <-down- dochub: Артефакты
+dochub <- static : Манифесты
+static <-down- facade_branch : Deploy
+
+@enduml

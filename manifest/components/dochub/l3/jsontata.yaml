@@ -1,9 +1,0 @@
-title: JSONata
-entity: component
-technologies:
-  - JavaScript
-  - VUE2
-links:
-  - id: dochub.vuex
-    title: Комплексный манифест
-    direction: <--
