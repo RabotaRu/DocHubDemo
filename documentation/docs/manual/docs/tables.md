@@ -167,12 +167,11 @@ docs:
   dochub.table.ex_http:
     type: table               
     headers:                  
-      - value: name             
-        text: ФИО автора
+      - value: title
+        text: Name
         sortable: true        
         align: left           
-        width: 100%            
-    origin: https://api.sberauto.com/strapi/getShowcases   # Внешний ресурс
+    origin: https://labs.ft.com/tech-radar/demo.json   # Внешний ресурс
     data: showcases.jsonata     # Обработа данных внешнего ресурса
 ```
 
@@ -180,12 +179,10 @@ docs:
 
 ```jsonata
 [
-    $.services.{
-        "id": id,
-        "title": title,
-        "text": text
+    $.{
+        "title": name
     }
-]
+]^(title)
 ```
 
 Результат:

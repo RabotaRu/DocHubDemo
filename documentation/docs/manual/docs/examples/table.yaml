@@ -90,22 +90,11 @@ docs:
   dochub.table.ex_http:
     type: table               
     headers:                  
-      - value: id             
-        text: ID
-        sortable: true        
-        align: left           
-        width: 5%            
       - value: title
-        text: Операция
+        text: Name
         sortable: true        
         align: left           
-        width: 20%            
-      - value: text
-        text: Описание
-        sortable: true        
-        align: left           
-        width: 75%            
-    origin: https://api.sberauto.com/strapi/getShowcases   # Внешний ресурс
+    origin: https://labs.ft.com/tech-radar/demo.json   # Внешний ресурс
     data: showcases.jsonata     # Обработа данных внешнего ресурса
   dochub.table.dataset:         # Табличный документ на оcновании источника данных
     type: table

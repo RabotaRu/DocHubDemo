@@ -1,7 +1,5 @@
 [
-    $.services.{
-        "id": id,
-        "title": title,
-        "text": text
+    $.{
+        "title": name
     }
-]^(id)
+]^(title)
