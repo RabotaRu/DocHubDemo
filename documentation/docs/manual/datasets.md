@@ -10,7 +10,7 @@
 ```yaml
 datasets:                       
   dochub.components.criticality:  # Определяет уровни критичности
-    data:                         # Предопределенные данные
+    source:                       # Предопределенные данные
       - id: k1
         title: Уровень K1
       - id: k2
@@ -35,7 +35,7 @@ datasets:
 ```yaml
 datasets:                       # Источники данных
   dochub.components:            # Идентификатор источника
-    data: >                     # JSONata запрос к архитектуре
+    source: >                   # JSONata запрос к архитектуре
       (
         [components.$spread().{
             "id": $keys()[0],
@@ -57,7 +57,7 @@ datasets:                       # Источники данных
 ```yaml
 datasets:                       
   dochub.components:            # Возвращает все архитектурные компоненты DocHub
-    data: >                     # JSONata запрос к архитектуре
+    source: >                   # JSONata запрос к архитектуре
       (
         [components.$spread().{
             "id": $keys()[0],
@@ -67,7 +67,7 @@ datasets:
       )
   dochub.components.l1:         # Выбирает только L1 для архитектурных компонентов DocHub
     origin: dochub.components   # Базовый источник данных
-    data: >                     # JSONata запрос к архитектуре
+    source: >                   # JSONata запрос к архитектуре
       ($[$count($split(id, "."))=2])
 ```
 

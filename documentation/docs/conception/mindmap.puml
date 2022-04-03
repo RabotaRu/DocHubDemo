@@ -24,6 +24,8 @@
 **** HTTP
 ** Публикация
 *** Автоматическая генерация\nартефактов
+**** [[/docs/dochub.datasets Источники данных]]
+***** [[/docs/dochub.tables Аналитические таблицы]]
 **** [[/docs/dochub.contexts Диаграммы контекстов]]
 ***** [[https://plantuml.com/ PlantUML]]
 **** [[/docs/dochub.aspects Диаграммы аспектов]]

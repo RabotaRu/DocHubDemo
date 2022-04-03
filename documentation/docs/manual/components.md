@@ -26,10 +26,11 @@ components:
       - dochub.radar
       - dochub.navigation
       - dochub.dataset
-    links:                  # Зависимость компонента от других компонентов
-      - id: dochub.gitlab   # Идентификатор компонента
-        direction: '<--'
-        title: Манифесты и документы
+    links:                            # Зависимость компонента от других компонентов
+      - id: dochub.gitlab             # Идентификатор компонента
+        direction: '<--'              # Напрвлене связи
+        title: Манифесты и документы  # Надпись на связи
+        contract: dochub.swagger      # Идентификатор документа описывающего контракт (может быть прямой ссылкой, например: http://foo.com)
       - id: dochub.plantuml
         direction: '-->'
         title: PlantUML

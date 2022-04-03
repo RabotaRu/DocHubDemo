@@ -130,6 +130,15 @@ DocHub с этой задачей хорошо справляется. Он мо
 пользователи получают удобный интерфейс для изучения публичной архитектуры.
 
 ![](@anchor/mindmap)
-## Mind Map
+
+## 5. Mind Map
 Функциональность DocHub можно представить Mind Map:
 ![Карта памяти DocHub](@document/dochub.mindmap)
+
+## 6. Поставка
+DocHub поставляется в составе двух компонентов в открытых исходных кодах:
+1. WEB портал - [https://github.com/RabotaRu/DocHub](https://github.com/RabotaRu/DocHub)
+2. Плагин для IDE JetBrains - [https://github.com/RabotaRu/DocHub](https://github.com/RabotaRu/DocHub)
+
+Лицензия использования Apache-2.0 License
+

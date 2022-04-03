@@ -17,7 +17,7 @@ docs:
         text: Значение
         sortable: true
         align: left
-    data:                     # Данные для таблицы (массив)
+    source:                   # Данные для таблицы (массив)
       - id: 1                 # Поде "id" 
         payload: Значение 1   # Значение поля "id"
       - id: 2
@@ -62,7 +62,7 @@ docs:
         sortable: true
         align: left
         link: link-contract
-    data: >                   # JSONata запрос к архитектуре
+    source: >                # JSONata запрос к архитектуре
       (
         $MANIFEST := $;
         $distinct([components.$spread().(
@@ -107,7 +107,7 @@ docs:
         sortable: true
         align: left
         link: link
-    data: contexts.jsonata     # Файл с запросом JSONata
+    source: contexts.jsonata   # Файл с запросом JSONata
 ```
 
 Содержимое файла "contexts.jsonata":
@@ -141,7 +141,7 @@ docs:
         sortable: true        
         align: left           
         width: 100%            
-    data: autors.yaml           # Файл с данными
+    source: autors.yaml        # Файл с данными
 ```
 
 Содержимое файла "autors.yaml"
@@ -172,7 +172,7 @@ docs:
         sortable: true        
         align: left           
     origin: https://labs.ft.com/tech-radar/demo.json   # Внешний ресурс
-    data: showcases.jsonata     # Обработа данных внешнего ресурса
+    source: showcases.jsonata     # Обработа данных внешнего ресурса
 ```
 
 Содержимое файла "showcases.jsonata"
@@ -205,10 +205,10 @@ docs:
         align: left
         width: 100%
         link: link
-    data: dochub.docs           # Идентификтор источника данных
+    source: dochub.docs         # Идентификтор источника данных
 datasets:                       # Источники данных
   dochub.docs:                  # Возвращает список всех документов
-    data: >                     # JSONata запрос к архитектуре
+    source: >                   # JSONata запрос к архитектуре
       (
         [docs.$spread().{
           "location": *.location,
@@ -226,7 +226,7 @@ datasets:                       # Источники данных
 
 Перед визуализацией таблицы есть возможность подвергнуть данные обработке.
 Для примера, возьмем за основу источник данных "dochub.docs". Его необходимо указать
-в поле "origin". В поле "data" нужно определить JSONata запрос. В примере отбираются документы 
+в поле "origin". В поле "source" нужно определить JSONata запрос. В примере отбираются документы 
 располагающиеся в меню "DocHub/Руководство/Документы/".
 
 ```yaml
@@ -241,7 +241,7 @@ docs:
         width: 100%
         link: link
     origin: dochub.docs         # Оригинальный источник данных
-    data: >                     # Отбирает документы концепции
+    source: >                   # Отбирает документы концепции
       (
         $[$substring(location, 0, 29) = "DocHub/Руководство/Документы/"].{
           "title": $substring(location, 29),
@@ -250,7 +250,7 @@ docs:
       )
 datasets:                       # Источники данных
   dochub.docs:                  # Возвращает список всех документов
-    data: >                     # JSONata запрос к архитектуре
+    source: >                   # JSONata запрос к архитектуре
       (
         [docs.$spread().{
           "location": *.location,

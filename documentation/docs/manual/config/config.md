@@ -32,4 +32,6 @@
 |                                        |                                                                             |
 | **VUE_APP_DOCHUB_APPEND_dochub.docs**  | Если "y", подключает манифест DocHab расположенный                          |
 |                                        | \[хост]/manifest/root.yaml                                                  |
-
+|                                        |                                                                             |
+| **VUE_APP_DOCHUB_MODE=plugin**         | Если "plugin" сборка осуществляется для использования в IDEA плагине        |
+|                                        | https://github.com/RabotaRu/DocHubIdeaPlugin                                |
