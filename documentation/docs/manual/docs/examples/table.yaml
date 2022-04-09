@@ -11,7 +11,7 @@ docs:
         text: Значение
         sortable: true
         align: left
-    data:                     # Данные для таблицы (массив)
+    source:                     # Данные для таблицы (массив)
       - id: 1                 # Поде "id" 
         payload: Значение 1   # Значение поля "id"
       - id: 2
@@ -45,7 +45,7 @@ docs:
         sortable: true
         align: left
         link: link-contract
-    data: >                   # JSONata запрос к архитектуре
+    source: >                   # JSONata запрос к архитектуре
       (
         $MANIFEST := $;
         $distinct([components.$spread().(
@@ -64,7 +64,7 @@ docs:
         )])^(from)
       )
   dochub.table.ex_jsonata:
-    type: table               
+    type: table
     headers:                  
       - value: id             
         text: Идентификатор   
@@ -77,7 +77,7 @@ docs:
         sortable: true
         align: left
         link: link
-    data: contexts.jsonata     # Файл с запросом JSONata
+    source: contexts.jsonata     # Файл с запросом JSONata
   dochub.table.ex_yaml:
     type: table               
     headers:                  
@@ -86,7 +86,7 @@ docs:
         sortable: true        
         align: left           
         width: 100%            
-    data: autors.yaml           # Файл с данными
+    source: autors.yaml           # Файл с данными
   dochub.table.ex_http:
     type: table               
     headers:                  
@@ -95,7 +95,7 @@ docs:
         sortable: true        
         align: left           
     origin: https://labs.ft.com/tech-radar/demo.json   # Внешний ресурс
-    data: showcases.jsonata     # Обработа данных внешнего ресурса
+    source: showcases.jsonata     # Обработа данных внешнего ресурса
   dochub.table.dataset:         # Табличный документ на оcновании источника данных
     type: table
     headers:
@@ -105,7 +105,7 @@ docs:
         align: left
         width: 100%
         link: link
-    data: dochub.docs           # Идентификтор источника данных
+    source: dochub.docs           # Идентификтор источника данных
   dochub.table.dataset.post:    # Табличный с портобработкой данных источника
     type: table
     headers:
@@ -116,7 +116,7 @@ docs:
         width: 100%
         link: link
     origin: dochub.docs         # Оригинальный источник данных
-    data: >                     # Отбирает документы концепции
+    source: >                     # Отбирает документы концепции
       (
         $[$substring(location, 0, 29) = "DocHub/Руководство/Документы/"].{
           "title": $substring(location, 29),
@@ -131,7 +131,7 @@ docs:
         sortable: true
         align: left
         width: 100%
-    data: dochub.components.criticality
+    source: dochub.components.criticality
   dochub.dataset.li:           # Табличный документ на оcновании предопределенного источника данных
     type: table
     headers:
@@ -141,10 +141,46 @@ docs:
         align: left
         width: 100%
         link: link
-    data: dochub.components.l1
+    source: dochub.components.l1
+  dochub.table.integrations:          # Базовое описание таблицы интеграций
+    type: table
+    headers:
+      - value: from
+        text: Система 1
+        sortable: true
+        align: left
+        width: 20%
+        link: link-from       
+      - value: to
+        text: Система 2
+        sortable: true
+        align: left
+        width: 20%
+        link: link-to
+      - value: direction
+        text: Связь
+        sortable: true
+        align: center
+        width: 5%
+      - value: title
+        text: Описание
+        sortable: true
+        align: left
+      - value: contract
+        text: Контракт
+        sortable: true
+        align: left
+        link: link-contract
+  dochub.table.integrations.vuex:     # Отбирает только компоненты VUEX
+    $prototype: dochub.table.select   # Родительская таблицы
+    origin: dochub.integrations       # Базовый источник данных
+    source: >
+        (
+            $[from="VUEX" or to="VUEX"]
+        )
 datasets:                       # Источники данных
   dochub.docs:                  # Возвращает список всех документов
-    data: >                     # Выводит все документы
+    source: >                     # Выводит все документы
       (
         [docs.$spread().{
           "location": *.location,
@@ -152,7 +188,7 @@ datasets:                       # Источники данных
         }[location]^(location)]
       )
   dochub.components.criticality:  # Определяет уровни критичности
-    data:                         # Предопределенные данные
+    source:                         # Предопределенные данные
       - id: k1
         title: Уровень K1
       - id: k2
@@ -162,7 +198,7 @@ datasets:                       # Источники данных
       - id: k4
         title: Уровень K4
   dochub.components:            # Возвращает все архитектурные компоненты DocHub
-    data: >                     # JSONata запрос к архитектуре
+    source: >                     # JSONata запрос к архитектуре
       (
         [components.$spread().{
             "id": $keys()[0],
@@ -172,5 +208,24 @@ datasets:                       # Источники данных
       )
   dochub.components.l1:         # Выбирает только L1 для архитектурных компонентов DocHub
     origin: dochub.components   # Базовый источник данных
-    data: >                     # JSONata запрос к архитектуре
+    source: >                     # JSONata запрос к архитектуре
       ($[$count($split(id, "."))=2])
+  dochub.integrations:          # Базовый источник данных интеграций
+    source: >                   # JSONata запрос к архитектуре
+      (
+        $MANIFEST := $;
+        $distinct([components.$spread().(
+            $COMPONENT := $;
+            $COMPONENT_ID := $keys()[0];
+            $.*.links.{
+                "from": $COMPONENT.*.title,
+                "link-from": "/architect/components/" & $COMPONENT_ID,
+                "to": id ? $lookup($MANIFEST.components, id).title : id,
+                "link-to": "/architect/components/" & id,
+                "contract": contract ? $lookup($MANIFEST.docs, contract).location : contract,
+                "link-contract": "/docs/" & contract,
+                "title": title,
+                "direction": direction
+            };
+        )])^(from)
+      )

@@ -1,69 +1,69 @@
 imports:
   - examples/table.yaml
 docs:
-    dochub.docs:
-      location: DocHub/Руководство/Документы
-      description: Документы
-      type: markdown
-      subjects:
-        - dochub.front
-        - dochub.front.spa
-        - dochub.front.spa.blank
-        - dochub.front.spa.blank.doc
-      source: docs.md
-    dochub.markdown:
-      location: DocHub/Руководство/Документы/Markdwon
-      description: Markdown
-      type: markdown
-      subjects:
-        - dochub.front
-        - dochub.front.spa
-        - dochub.front.spa.blank
-        - dochub.front.spa.blank.doc
-      source: markdown.md
-    dochub.plantuml:
-      location: DocHub/Руководство/Документы/PlantUML
-      description: Markdown
-      type: markdown
-      subjects:
-        - dochub.front
-        - dochub.front.spa
-        - dochub.front.spa.blank
-        - dochub.front.spa.blank.doc
-      source: plantuml.md
-    dochub.swagger:
-      location: DocHub/Руководство/Документы/Swagger
-      description: Markdown
-      type: markdown
-      subjects:
-        - dochub.front
-        - dochub.front.spa
-        - dochub.front.spa.blank
-        - dochub.front.spa.blank.doc
-      source: swagger.md
-    dochub.tables:
-      location: DocHub/Руководство/Документы/Таблицы
-      description: Markdown
-      type: markdown
-      subjects:
-        - dochub.front
-        - dochub.front.spa
-        - dochub.front.spa.blank
-        - dochub.front.spa.blank.doc
-      source: tables.md
-    dochub.example.pml:
-      type: PlantUML
-      subjects:
-        - dochub.front
-        - dochub.front.spa
-        - dochub.front.spa.blank
-        - dochub.front.spa.blank.doc
-      source: examples/example.puml
-    dochub.example.swgr:
-      type: OpenAPI
-      subjects:
-        - dochub.front
-        - dochub.front.spa
-        - dochub.front.spa.blank
-        - dochub.front.spa.blank.doc
-      source: examples/example.yaml
+  dochub.docs:
+    location: DocHub/Руководство/Документы
+    description: Документы
+    type: markdown
+    subjects:
+      - dochub.front
+      - dochub.front.spa
+      - dochub.front.spa.blank
+      - dochub.front.spa.blank.doc
+    source: docs.md
+  dochub.markdown:
+    location: DocHub/Руководство/Документы/Markdwon
+    description: Markdown
+    type: markdown
+    subjects:
+      - dochub.front
+      - dochub.front.spa
+      - dochub.front.spa.blank
+      - dochub.front.spa.blank.doc
+    source: markdown.md
+  dochub.plantuml:
+    location: DocHub/Руководство/Документы/PlantUML
+    description: Markdown
+    type: markdown
+    subjects:
+      - dochub.front
+      - dochub.front.spa
+      - dochub.front.spa.blank
+      - dochub.front.spa.blank.doc
+    source: plantuml.md
+  dochub.swagger:
+    location: DocHub/Руководство/Документы/Swagger
+    description: Markdown
+    type: markdown
+    subjects:
+      - dochub.front
+      - dochub.front.spa
+      - dochub.front.spa.blank
+      - dochub.front.spa.blank.doc
+    source: swagger.md
+  dochub.tables:
+    location: DocHub/Руководство/Документы/Таблицы
+    description: Markdown
+    type: markdown
+    subjects:
+      - dochub.front
+      - dochub.front.spa
+      - dochub.front.spa.blank
+      - dochub.front.spa.blank.doc
+    source: tables.md
+  dochub.example.pml:
+    type: PlantUML
+    subjects:
+      - dochub.front
+      - dochub.front.spa
+      - dochub.front.spa.blank
+      - dochub.front.spa.blank.doc
+    source: examples/example.puml
+  dochub.example.swgr:
+    type: OpenAPI
+    subjects:
+      - dochub.front
+      - dochub.front.spa
+      - dochub.front.spa.blank
+      - dochub.front.spa.blank.doc
+    source: examples/example.yaml

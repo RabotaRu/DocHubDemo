@@ -90,6 +90,15 @@ docs:
         - dochub.front
         - dochub.front.spa
         - dochub.front.spa.dataset
+    dochub.inheritance:
+      location: DocHub/Руководство/Наследование
+      description: Наследование объектов
+      type: markdown
+      source: inheritance.md
+      subjects:
+        - dochub.front
+        - dochub.front.spa
+        - dochub.front.spa.dataset
     dochub.config:
       icon: settings
       location: DocHub/Конфигурирование

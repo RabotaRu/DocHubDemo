@@ -14,6 +14,6 @@
 
 ![Технологический радар](@radar/tools)
 
-
+[Далее](/docs/dochub.inheritance)
 
 
