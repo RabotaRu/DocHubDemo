@@ -1,0 +1,53 @@
+rules:
+  validators:
+    dochub.fields:
+      title: Заполнение полей                         # Название валидатора
+    dochub.fields.experts:                            # Валидатор контролирует заполнение поля expert для компонентов L1
+      title: Не указаны эксперты для компонентов      # Название валидатора
+      source: >                                       # Источник данных об ошибках. В данном случае JSONata запрос
+        ([([
+          components.$spread().(                                                /* Сканируем все компоненты */
+            $ID := $keys()[0];
+              {                                                                 /* Генерируем массив признаков проблем */
+                "isComponent": *.entity = "component",                          /* Это компонент */
+                "isDocHubL1Domain": $boolean($match($ID, /dochub\.[^\.]*$/)),   /* в домене DocHub L1 */
+                "isExpertEmpty":  $not($boolean("" & *.expert)),                /* и поле expert не заполнено */
+                "id": $ID
+              }
+          )        
+        ][isDocHubL1Domain and isExpertEmpty and isComponent]).{ /* Отбираем все компоненты где поле 'expert' пустое*/
+            "uid": "expert-component-" & id,                                    /* Уникальный идентификатор выявленной ошибки */
+            "location": "/architect/components/" & id,                          /* Ссылка на расположение объекта ошибки */
+            "correction": "Укажите эксперта по компоненту",                     /* Рекомендации как исправить проблему */
+            "description": "Компоненты L1 должены иметь сведения об экспертах."
+        }])
+    dochub.fields.source:                             # Валидатор контролирует заполнение поля указывающего на исходник для домена DocHub
+      title: Не указан файл исходного кода            # Название валидатора
+      source: >                                       # Источник данных об ошибках. В данном случае JSONata запрос
+        ([([
+          components.$spread().(                                              /* Сканируем все компоненты */
+            $ID := $keys()[0];
+              {                                                               /* Генерируем массив признаков проблем */
+                "isComponent": *.entity = "component",                        /* Это компонент */
+                "isDocHubDomain": $boolean($match($ID, /dochub\.front.*/)),   /* в домене DocHub */
+                "isSourceEmpty":  $not($boolean("" & *.source)),              /* и поле source не заполнено */
+                "id": $ID
+              }
+          )        
+        ][isDocHubDomain and isSourceEmpty and isComponent]).{ /* Отбираем все компоненты где поле 'source' пустое*/
+            "uid": "source-component-" & id,                                    /* Уникальный идентификатор выявленной ошибки */
+            "location": "/architect/components/" & id,                          /* Ссылка на расположение объекта ошибки */
+            "correction": "Укажите где расположен файл с исходными кодами",    /* Рекомендации как исправить проблему */
+            "description": "Компоненты должены иметь сведения о файлах исходного кода в которых они реализуются. 
+                Если необходимо исключить для данного компонента эту информацию,
+                укажите идентификатор ошибки в разделе 'exceptions' с описанием причиныsss
+            ",
+            "isDocHubDomain":isDocHubDomain
+        }])
+  exceptions:                                               # Исключения для валидаторов
+    "source-component-dochub.front.spa.blank.doc.markdown": # UID ошибки для исключения
+      reason: >                                             # Причина исключения
+        Пример исключения для указания исходных кодов
+      cause: /docs/dochub.exceptions.examples.doc_markdown   # Документ-основание исключения
+    "$dh-mm-ofb-dochub":
+      reason: Корневой компонент может не входить в контекст

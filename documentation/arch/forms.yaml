@@ -2,6 +2,6 @@ forms:
   - entity:
       - component
     fields:
-      source_file:
+      source:
         title: Файл
         required: true

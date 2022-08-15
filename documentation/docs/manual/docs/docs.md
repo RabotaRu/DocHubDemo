@@ -2,11 +2,11 @@
 
 Документ - многофункциональная сущность. Поддерживаются форматы:
 * **[PlantUML](/docs/dochub.plantuml)** - позволяет создавать диаграммы из обычного текстового языка. [Подробнее](https://plantuml.com/ru/).
-* **[Swagger (OpenAPI)](/docs/dochub.swagger)**  - язык описания интерфейсов для описания RESTful API, выраженных с помощью JSON. [Подробнее](https://swagger.io/);
-* **[Markdown](/docs/dochub.markdown)** - облегчённый язык разметки, созданный с целью обозначения форматирования в простом тексте. [Подробнее](https://ru.wikipedia.org/wiki/Markdown)
+* **[Swagger (OpenAPI)](/docs/dochub.swagger)**  - язык описания интерфейсов для описания RESTful API, выраженных с помощью JSON. [Подробнее](https://swagger.io/).
+* **[Markdown](/docs/dochub.markdown)** - облегчённый язык разметки, созданный с целью обозначения форматирования в простом тексте. [Подробнее](https://ru.wikipedia.org/wiki/Markdown).
 * **[Table](/docs/dochub.tables)** - документ для представления данных в табличной форме.
 
-Описание документов в манифесте [/docs/manual/manifest.yaml](/docs/manual/manifest.yaml):
+Описание документов в манифесте:
 ```yaml
 docs:                                 # Документы
     dochub.manual:                    # Идентификатор документа

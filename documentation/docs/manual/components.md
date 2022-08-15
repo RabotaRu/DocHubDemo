@@ -11,6 +11,7 @@ components:
   dochub.front:             # Идентификатор компонента
     title: DocHub           # Название компонента
     entity: component       # Сущность компонента из PlantUML (https://plantuml.com/ru/deployment-diagram)
+    source: ./              # Кастомное поле определенное в forms
     technologies:           # Используемые технологии
       - JavaScript
       - VUEJS2

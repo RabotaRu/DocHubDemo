@@ -5,6 +5,7 @@ components:
   dochub.web:
     title: WEB   
     entity: component
+    expert: R.Piontik
     technologies:
       - HTTP
     aspects:

@@ -5,6 +5,7 @@ components:
   dochub.gitlab:
     title: GitLab
     entity: component
+    expert: R.Piontik
     technologies:
       - GitLab
     aspects:

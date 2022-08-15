@@ -5,6 +5,7 @@ components:
   dochub.plantuml:
       title: PlantUML render server
       entity: component
+      expert: R.Piontik
       technologies:
       - PluntUML
       aspects:

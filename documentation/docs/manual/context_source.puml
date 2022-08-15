@@ -1,0 +1,17 @@
+@startuml
+database "Code" as code
+participant "Source" as middlware
+participant "Context" as context
+participant "PlantUML server" as server
+
+code->middlware: Код архитектуры
+middlware->middlware: Преобразование
+middlware->context: Преобразованный код
+context->context: Применение фильтра
+context->context: Генерация PlantUML
+context->server: PlantUML
+server->server: Генерация диаграммы
+server->context: SVG диаграмма
+context->context: Постобработка
+context->context: Демонстрация
+@enduml

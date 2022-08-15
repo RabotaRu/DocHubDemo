@@ -5,6 +5,7 @@ components:
   dochub.browser:
     title: Браузер
     entity: component
+#   expert: R.Piontik  # Намеренно допущена ошибка для примера
     technologies:
       - Chrome
       - Firefox
@@ -14,7 +15,7 @@ components:
   #***********************************************************
   dochub.browser.localstorage:
     title: LocalStorage
-    entity: component
+    entity: database
     technologies:
       - Chrome
       - Firefox

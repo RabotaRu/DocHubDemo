@@ -1,0 +1,30 @@
+docs:
+    dochub.rules:
+        location: DocHub/Руководство/Правила
+        description: Подсистема контроля
+        type: markdown
+        source: rules.md
+        subjects:
+          - dochub
+    dochub.rules.validators:
+        location: DocHub/Руководство/Правила/Валидаторы
+        description: Валидаторы
+        type: markdown
+        source: validators.md
+        subjects:
+          - dochub
+    dochub.rules.exceptions:
+        location: DocHub/Руководство/Правила/Исключения
+        description: Исключения
+        type: markdown
+        source: exceptions.md
+        subjects:
+          - dochub
+    dochub.standards.examples.expert:
+        description: Пример стандарта
+        type: markdown
+        source: standard.md
+    dochub.exceptions.examples.doc_markdown:
+        description: Пример основания для исключения
+        type: markdown
+        source: exreason.md

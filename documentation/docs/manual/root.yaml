@@ -1,5 +1,6 @@
 imports:
   - docs/root.yaml
+  - rules/root.yaml
 docs:
     dochub.manual:
         location: DocHub/Руководство
@@ -107,3 +108,6 @@ docs:
       subjects:
         - dochub.front
       source: config/config.md
+    dochub.context.source:
+      type: plantuml
+      source: context_source.puml

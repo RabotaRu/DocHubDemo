@@ -5,7 +5,7 @@
 наполняя необходимыми данными. 
 
 ```yaml
-dataset:
+datasets:
   dochub.integrations:          # Базовый источник данных интеграций
     source: >                   # JSONata запрос к архитектуре
       (
@@ -74,5 +74,5 @@ docs:
 * [Источников данных](/docs/dochub.datasets);
 * [Аспектов](/docs/dochub.aspects).
 
-
+[Далее](/docs/dochub.rules)
 

@@ -1,7 +1,16 @@
 aspects:   # Архитектурные аспекты
+    dochub:
+        title: DocHub
+        location: DocHub
+    dochub.git:
+        title: Git
+        location: DocHub/Git
     dochub.git.client:
         title: Развитие репы
         location: DocHub/GitLab/Git-клиент
+    dochub.gitlab:
+        title: GitLab
+        location: DocHub/GitLab
     dochub.gitlab.auth:
         title: Авторизация GitLab
         location: DocHub/GitLab/Авторизация
@@ -26,12 +35,15 @@ aspects:   # Архитектурные аспекты
     dochub.cache:
         title: Кэш данных
         location: DocHub/Кэш
+    dochub.manifest:
+        title: Манифесты
+        location: DocHub/Манифесты
     dochub.manifest.storage:
         title: Хранилище манифестов
-        location: DocHub/Хранилище манифестов
+        location: DocHub/Манифесты/Хранилище манифестов
     dochub.manifest.parsing:
         title: Парсинг манифестов
-        location: DocHub/Парсинг манифестов
+        location: DocHub/Манифесты/Парсинг манифестов
     dochub.dataset:
         title: Источники данных
         location: DocHub/Источники данных
