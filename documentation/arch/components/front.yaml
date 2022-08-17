@@ -227,7 +227,15 @@ components:
     technologies:
       - JavaScript
       - VUE2
-      - Markdown    
+      - Markdown
+  dochub.front.spa.blank.doc.asyncapi:
+    title: AsyncApi
+    entity: component
+    source: ./src/Docs/DocAsyncApi.vue
+    technologies:
+      - JavaScript
+      - VUE2
+      - Markdown 
   dochub.front.spa.blank.doc.swagger:
     title: Swagger
     entity: component

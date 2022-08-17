@@ -35,4 +35,4 @@ paths:
 ![Swagger контракт](@document/dochub.example.swgr)
 
 
-[Далее](/docs/dochub.markdown)
+[Далее](/docs/dochub.asyncapi)

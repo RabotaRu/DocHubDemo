@@ -19,7 +19,7 @@
   реализующие, например, бизнес-функцию.
 * **[docs](/docs/dochub.docs)** -
   Документы необходимые для детального описания архитектуры. Например, контракты в
-  формате [OpenAPI](/docs/dochub.swagger), [PlantUML](/docs/dochub.plantuml) диаграммы, 
+  формате [OpenAPI](/docs/dochub.swagger), [AsyncApi](/docs/dochub.asyncapi) событийно-ориентированные сервисы, [PlantUML](/docs/dochub.plantuml) диаграммы, 
   [Markdown](/docs/dochub.markdown) документация и аналитические [таблицы](/docs/dochub.tables).
 * **[forms](/docs/dochub.forms)** -
   Настраиваемые формы карточек архитектурных объектов.
