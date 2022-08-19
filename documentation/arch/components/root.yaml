@@ -5,3 +5,4 @@ imports:
   - gitlab.yaml
   - browser.yaml
   - web.yaml
+  - examples/root.yaml

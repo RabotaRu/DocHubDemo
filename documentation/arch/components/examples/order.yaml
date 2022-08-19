@@ -1,0 +1,65 @@
+components:
+  #***********************************************************
+  #               Компонент-пример сервиса заказов
+  #***********************************************************
+  dochub.examples.orders:
+    title: Сервис управления заказами
+    entity: component
+    technologies:
+      - PHP
+    asyncapi:     # Кастомное поле, созданное для примера сборки контрактов из архитектуры через шаблоны
+                  # см. https://dochub.info/docs/dochub.templates
+      servers:
+        orders:
+          url: mqtt://order.host.net
+          protocol: mqtt
+          description: Orders gateway
+      channels:
+        order/create:
+          subscribe:
+            operationId: emitOrderCreate
+            message:
+              $ref: "#/components/messages/OrderCreate"
+      components:
+        messages:
+          OrderCreate:
+            name: orderCreate
+            title: Создание заказа
+            contentType: application/json
+            payload:
+              $ref: "#/components/schemas/order"
+        schemas:
+          order:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              customer:
+                type: string
+                format: uuid
+              curr:
+                type: string
+                description: "Валюта"
+              value:
+                type: number
+                description: "Сумма"
+              createdAt:
+                type: string
+                format: date-time
+                description: "Момент создания"
+    openapi: # Кастомное поле, созданное для примера сборки контрактов из архитектуры через шаблоны
+             # см. https://dochub.info/docs/dochub.templates
+      paths:
+        /orders:
+          get:
+            summary: Получение списка заказов
+            responses:
+              '200':    # status code
+                content:
+                  application/json:
+                    schema:
+                      type: array
+                      items:
+                        type: string
+                        format: uid

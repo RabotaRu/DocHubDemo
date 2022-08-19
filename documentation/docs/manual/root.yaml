@@ -100,6 +100,15 @@ docs:
         - dochub.front
         - dochub.front.spa
         - dochub.front.spa.dataset
+    dochub.jsonata:
+      location: DocHub/Руководство/JSONata+
+      description: Расширения JSONata
+      type: markdown
+      subjects:
+        - dochub.front
+        - dochub.front.spa
+        - dochub.front.spa.dataset
+      source: jsonata.md
     dochub.config:
       icon: settings
       location: DocHub/Конфигурирование

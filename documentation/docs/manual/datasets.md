@@ -75,8 +75,4 @@ datasets:
 
 ![Зависимый источник](@document/dochub.dataset.li)
 
-[Далее](/docs/dochub.forms)
-
-
-
-
+[Далее](/docs/dochub.jsonata)

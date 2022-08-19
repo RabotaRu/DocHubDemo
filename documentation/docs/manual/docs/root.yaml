@@ -1,9 +1,13 @@
 imports:
   - examples/table.yaml
 docs:
+  # *****************************************  
+  #        Руководство по документам 
+  # *****************************************  
   dochub.docs:
     location: DocHub/Руководство/Документы
     description: Документы
+    autor: R.Piontik        # Кастомное поле - Автор документа
     type: markdown
     subjects:
       - dochub.front
@@ -14,6 +18,7 @@ docs:
   dochub.markdown:
     location: DocHub/Руководство/Документы/Markdown
     description: Markdown
+    autor: R.Piontik
     type: markdown
     subjects:
       - dochub.front
@@ -23,7 +28,8 @@ docs:
     source: markdown.md
   dochub.plantuml:
     location: DocHub/Руководство/Документы/PlantUML
-    description: Markdown
+    description: PlantUML
+    autor: R.Piontik
     type: markdown
     subjects:
       - dochub.front
@@ -43,7 +49,8 @@ docs:
     source: asyncapi.md
   dochub.swagger:
     location: DocHub/Руководство/Документы/Swagger
-    description: Markdown
+    description: Swagger
+    autor: R.Piontik
     type: markdown
     subjects:
       - dochub.front
@@ -53,7 +60,8 @@ docs:
     source: swagger.md
   dochub.tables:
     location: DocHub/Руководство/Документы/Таблицы
-    description: Markdown
+    description: Таблицы
+    autor: R.Piontik
     type: markdown
     subjects:
       - dochub.front
@@ -61,6 +69,9 @@ docs:
       - dochub.front.spa.blank
       - dochub.front.spa.blank.doc
     source: tables.md
+  # *****************************************  
+  #            Примеры документов
+  # *****************************************  
   dochub.example.pml:
     type: PlantUML
     subjects:
@@ -85,3 +96,76 @@ docs:
       - dochub.front.spa.blank
       - dochub.front.spa.blank.doc
     source: examples/asyncapi.yaml
+  # *****************************************  
+  #                 Шаблоны
+  # *****************************************  
+  dochub.templates:         # Пример генерации markdown документа по шаблону
+    location: DocHub/Руководство/Документы/Шаблоны
+    description: Шаблоны
+    type: markdown
+    autor: R.Piontik        # Кастомное поле - Автор документа
+    approvers:              # Кастомное поле - список согласующих
+      - P.Petrov
+      - S.Sidorov
+      - N.Nikolaev
+    source: >               # JSONata запрос для формирования параметров шаблона
+      (
+        {
+          "id": $self._id,              /* Идентификатор документа */
+          "autor": $self.autor,         /* Автор документа */
+          "approvers": $self.approvers, /* Согласующие */
+          "docs": [docs.$spread().{     /* Другие документы автора */
+            "id": $keys()[0],
+            "title": *.description,
+            "autor": *.autor
+          }][autor=$self.autor]
+        }
+      )
+    subjects:
+      - dochub.front
+      - dochub.front.spa
+      - dochub.front.spa.blank
+      - dochub.front.spa.blank.doc
+    template: templates.md  # Шаблон документа
+  dochub.templates.pml: # Пример генерации PlantUML документа по шаблону
+    type: PlantUML
+    source: >
+      (
+        {
+          "entities": $distinct([     /* Получаем все использованные сущности при описании архитектуры */ 
+              components.*.entity
+          ])
+        }
+      )
+    subjects:
+      - dochub.front
+      - dochub.front.spa
+      - dochub.front.spa.blank
+      - dochub.front.spa.blank.doc
+    template: examples/template.puml
+  dochub.templates.asyncapi: # Пример генерации AsyncAPI документа по шаблону
+    type: AsyncAPI
+    source: >
+      (
+        $BODY := $mergedeep([components.*.asyncapi]);
+        {
+            "content": [$BODY.$spread().{
+                "field": $keys()[0],
+                "body": $string($lookup($, $keys()[0]))
+            }]
+        }
+      )
+    template: examples/asyncapi_template.json
+  dochub.templates.openapi: # Пример генерации OpenAPI документа по шаблону
+    type: OpenAPI
+    source: >
+      (
+        $BODY := $mergedeep([components.*.openapi]);
+        {
+            "content": [$BODY.$spread().{
+                "field": $keys()[0],
+                "body": $string($lookup($, $keys()[0]))
+            }]
+        }
+      )
+    template: examples/openapi_template.json

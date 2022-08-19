@@ -1,0 +1,16 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Пример шаблона OpenAPI",
+    "description": "Контракты собираются из нескольких компонентов архитетуры"
+  },
+  "servers": [
+    {
+      "url": "http://host.net",
+      "description": "Сервис заказов"
+    }
+  ]
+  {{#content}}
+    ,"{{field}}":{{&body}}
+  {{/content}}
+}

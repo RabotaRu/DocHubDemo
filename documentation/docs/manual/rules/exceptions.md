@@ -16,4 +16,5 @@ rules:
 
 В примере создано исключение для валидатра "dochub.source".
 
-Это все.
+[Далее](/docs/dochub.technologies) 
+

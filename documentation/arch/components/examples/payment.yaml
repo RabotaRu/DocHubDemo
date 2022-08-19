@@ -1,0 +1,65 @@
+components:
+  #***********************************************************
+  #               Компонент-пример сервиса оплаты
+  #***********************************************************
+  dochub.examples.payment:
+    title: Сервис оплаты   
+    entity: component
+    expert: R.Piontik
+    technologies:
+      - SberPay
+      - Go
+    asyncapi:     # Кастомное поле, созданное для примера сборки контрактов из архитектуры через шаблоны
+                  # см. https://dochub.info/docs/dochub.templates
+      servers:
+        payments:
+          url: mqtt://pay.host.net
+          protocol: mqtt
+          description: Payment gateway
+      channels:
+        pay/payment:
+          subscribe:
+            operationId: emitPayment
+            message:
+              $ref: "#/components/messages/Payment"
+      components:
+        messages:
+          Payment:
+            name: payment
+            title: Оплата
+            summary: Сообщение по оплате
+            contentType: application/json
+            payload:
+              $ref: "#/components/schemas/payment"
+        schemas:
+          payment:
+            type: object
+            properties:
+              account:
+                type: string
+                description: "Номер счета"
+              curr:
+                type: string
+                description: "Валюта"
+              value:
+                type: number
+                description: "Сумма"
+              createdAt:
+                type: string
+                format: date-time
+                description: "Момент создания"
+    openapi: # Кастомное поле, созданное для примера сборки контрактов из архитектуры через шаблоны
+             # см. https://dochub.info/docs/dochub.templates
+      paths:
+        /payments:
+          get:
+            summary: Получение списка счетов
+            responses:
+              '200':    # status code
+                content:
+                  application/json:
+                    schema:
+                      type: array
+                      items:
+                        type: string
+                        format: uid
