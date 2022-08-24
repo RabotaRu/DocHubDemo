@@ -19,31 +19,41 @@ rules:
             "uid": "expert-component-" & id,                                    /* Уникальный идентификатор выявленной ошибки */
             "location": "/architect/components/" & id,                          /* Ссылка на расположение объекта ошибки */
             "correction": "Укажите эксперта по компоненту",                     /* Рекомендации как исправить проблему */
-            "description": "Компоненты L1 должены иметь сведения об экспертах."
+            "description": "Компоненты L1 должны иметь сведения об экспертах."
         }])
     dochub.fields.source:                             # Валидатор контролирует заполнение поля указывающего на исходник для домена DocHub
+                                                      # используя для этого JSON schema (https://json-schema.org/)
       title: Не указан файл исходного кода            # Название валидатора
-      source: >                                       # Источник данных об ошибках. В данном случае JSONata запрос
-        ([([
-          components.$spread().(                                              /* Сканируем все компоненты */
-            $ID := $keys()[0];
-              {                                                               /* Генерируем массив признаков проблем */
-                "isComponent": *.entity = "component",                        /* Это компонент */
-                "isDocHubDomain": $boolean($match($ID, /dochub\.front.*/)),   /* в домене DocHub */
-                "isSourceEmpty":  $not($boolean("" & *.source)),              /* и поле source не заполнено */
-                "id": $ID
+      schema:                                         # JSON Schema
+        type: object
+        properties:
+          source:
+            type: string
+        required:
+        - source
+        additionalProperties: true
+      source: >                                       # Источник данных об ошибках
+        (
+          /* Создаем валидатор JSON schema */
+          $validator := $jsonschema($self.schema);  /* Схему валидата получаем из контекста отклонения*/
+          /* Формируем базу для проверки */
+          ([([
+            components.$spread().( /* Сканируем все компоненты */
+              $ID := $keys()[0];
+              {														                                    /* Генерируем массив признаков проблем */
+                "isComponent": *.entity = "component",						            /* Это компонент */
+                "isDocHubDomain": $boolean($match($ID, /dochub\.front.*/)),	  /* в домене DocHub */
+                "id": $ID,												                            /* Запоминаем идентификатор компонента */
+                "isvalid": $validator($.*)									                  /* Валидируем компонент по схеме */									
               }
-          )        
-        ][isDocHubDomain and isSourceEmpty and isComponent]).{ /* Отбираем все компоненты где поле 'source' пустое*/
-            "uid": "source-component-" & id,                                    /* Уникальный идентификатор выявленной ошибки */
-            "location": "/architect/components/" & id,                          /* Ссылка на расположение объекта ошибки */
-            "correction": "Укажите где расположен файл с исходными кодами",    /* Рекомендации как исправить проблему */
-            "description": "Компоненты должены иметь сведения о файлах исходного кода в которых они реализуются. 
-                Если необходимо исключить для данного компонента эту информацию,
-                укажите идентификатор ошибки в разделе 'exceptions' с описанием причиныsss
-            ",
-            "isDocHubDomain":isDocHubDomain
-        }])
+            )        
+          ][isDocHubDomain and isComponent and isvalid != true]).isvalid.{  /* Генерируем отклонения по выявленным нарушениям */
+            "uid": $.params.missingProperty & "-component-" & %.id,				  /* Уникальный идентификатор выявленной ошибки */
+            "location": "/architect/components/" & %.id,						        /* Ссылка на расположение объекта ошибки */
+            "correction": "Заполните необходимые поля",						          /* Рекомендации как исправить проблему */
+            "description": message
+          }])
+        )
   exceptions:                                               # Исключения для валидаторов
     "source-component-dochub.front.spa.blank.doc.markdown": # UID ошибки для исключения
       reason: >                                             # Причина исключения

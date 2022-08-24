@@ -105,6 +105,50 @@ $merge([
 }
 ```
 
+### $jsonschema()
+
+Сигнатура: $jsonschema(object)
+
+На базе [JSON schema](https://json-schema.org/) создает валидатор, который можно использовать 
+для проверки структуры данных. Реализация функции основана на NPM пакете [ajv](https://www.npmjs.com/package/ajv).
+
+В параметре **object** передается схема. Возвращается функция-валидатор. Пример использования:
+
+```json
+(
+	/* Создаем валидатор */
+	$validator := $jsonschema({
+      "type": "object",
+      "properties": {
+          "foo": { "type": "integer" },
+          "bar": { "type": "string"}
+      },
+      "required": ["foo"],
+      "additionalProperties": false
+  });
+
+  /* Проверяем структуру */
+  $validator({
+      "foo": "error",
+      "bar": "abc"
+  });
+)
+```
+
+Результат:
+```json
+[
+    {
+        "instancePath": "/foo",
+        "schemaPath": "#/properties/foo/type",
+        "keyword": "type",
+        "params": {
+            "type": "integer"
+        },
+        "message": "должно быть integer"
+    }
+]
+```
 
 ## Дополнительные переменные
 
