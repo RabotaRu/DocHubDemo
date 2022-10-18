@@ -1,0 +1,181 @@
+entities: # Сущности расширенной матемодели
+    # Взаимводействия
+    interactions:               # Секция, где будет описываться объекты сущности "взаимодействие". Обязательно.
+        title: Взаимодействия   # Название сущности. Обязательно.
+        description: >          # Описание сущности текст или ссылка на документ. Необязательно.
+            Взаимодействия между компонентами
+        menu: >                 # Генератор раcположения в меню. Запрос или явное описание объета. Необязательно.
+          (
+            $interactions := $.interactions;
+            $makeLocation := function($id) {(
+                $arrleft := function($arr ,$count) {
+                    $map($arr, function($v, $i) {
+                    $i <= $count ? $v
+                    })
+                };
+                $domains := $split($id, ".");
+                "Взаимодействия/" & $join($map($domains, function($domain, $index) {(
+                    $lookup($interactions, $join($arrleft($domains, $index), ".")).title
+                )}), "/");
+            )};
+            $append([{
+                "icon": *.icon,                                                 /* Получаем иконку */
+                "link": "entities/interactions/tree",                           /* Ссылка на форму представления tree (дерево дерево объектов "interactions") */
+                "location": "Взаимодействия"                                    /* Расположение в меню */
+            }],
+                [$.interactions.$spread().{
+                    "icon": *.icon,                                             /* Получаем иконку */
+                    "link": "entities/interactions/blank?id=" & $keys()[0],     /* Формируем ссылку на бланк документ */
+                    "location": $makeLocation($keys()[0])                       /* Формируем расположение в меню */
+                }][location]
+            );
+          )
+        presentations:          # Представления объектов сущности. Обязательно.
+            tree:               # Идентификатор представления. Дерево взаимодействий.
+                type: plantuml  # Тип представления. Обязательно.
+                template: templates/tree.puml   # Путь к шаблону. Обяхательно.
+                source: >       # Источник данных для рендера шаблона. Возвращает дерево объектов "interactions". Обязательно.
+                  (
+                      $set("rpev-id", undefined);
+                      $arrleft := function($arr ,$count) {
+                          $map($arr, function($v, $i) {
+                              $i <= $count ? $v
+                          })
+                      };
+                      $interactions := $.interactions;
+                      [$interactions.$spread().($merge([{"id" : $keys()[0]}, $.*]))^(id).(
+                          $prev_nodes := $split($get("rpev-id"), ".");
+                          $prev_level := $count($prev_nodes);
+                          $curr_nodes := $split(id, ".");
+                          $set("isdiff", false);
+                          $result := $map($curr_nodes, function($v, $i) {(
+                              $set("isdiff", $get("isdiff") or $prev_level = 0 or $prev_level <= $i or $v != $prev_nodes[$i]) ? (
+                                  $id := $join($arrleft($curr_nodes, $i), ".");
+                                  $interaction :=  $lookup($interactions, $id);
+                                  {
+                                      "id": $id,
+                                      "level": $pad("", $i + 2, "*"),
+                                      "title": $interaction ? $interaction.title : $id,
+                                      "link": "/entities/interactions/blank?id=" & $id
+                                  }
+                              );
+                          )});
+                          $set("rpev-id", id);
+                          $result 
+                      )];
+                  )  
+            blank:              # Карточка объекта
+                type: plantuml  # Тип представления
+                template: templates/blank.puml
+                source: >       # Источник данных для рендера шаблона. Возвращает объект "interactions" по идентификатору переданному в параметрах.
+                    (
+                        $lookup(interactions, $params.id)
+                    )
+        schema:                  # JSON Schema контролирующая описание объекта сущности
+            type: object
+            patternProperties:
+                "[a-zA-Z0-9_]*(\\.[a-zA-Z0-9_]*)*$": # Шаблон ключа
+                    type: array
+                    minItems: 1
+                    items:
+                        type: object
+                        properties:
+                            icon:
+                                title: Иконка
+                                type: string
+                                minLength: 2
+                            title:
+                                title: Наименование
+                                type: string
+                                minLength: 5
+                            triggers:
+                                title: События запускающие взаимодействие
+                                type: array
+                                minItems: 1
+                                items:
+                                    type: string
+                                    minLength: 5
+                            steps:
+                                title: Описание взаимодействия
+                                type: array
+                                minItems: 1
+                                items:
+                                    type: object
+                                    properties:
+                                        from:
+                                            title: От кого
+                                            type: string
+                                            minLength: 1
+                                        to:
+                                            title: Кому
+                                            type: string
+                                            minLength: 1
+                                        value:
+                                            title: Что
+                                            type: string
+                                            minLength: 1
+                                    required:
+                                        - from
+                                        - to
+                                        - value
+                            results:
+                                title: Результаты взаимодействия
+                                type: array
+                                minItems: 1
+                                items:
+                                    type: string
+                                    minLength: 5
+                        required:
+                            - title
+                            - triggers
+                            - results
+                            - steps
+# Использование сущности расширенной метамодели
+interactions:
+  dochub:
+    title: DocHub 
+  dochub.user:
+    title: Взаимодействия с пользователем
+    triggers:
+      - Просмотр архитектуры
+    steps:
+      - from: User
+        to: DocHub
+        value: Вход на портал
+      - from: DocHub
+        to: User
+        value: Представление архитектурных артефактов
+    results:
+      - Информация о существующей архитектуре
+  dochub.user.check:
+    title: Прверка отклонений выявленных валидаторами
+    triggers:
+      - Просмотр архитектуры
+    steps:
+      - from: User
+        to: DocHub
+        value: Выбор раздела Проблемы
+      - from: DocHub
+        to: User
+        value: Генерация дерева со статусами
+      - from: User
+        to: DocHub
+        value: Выбор отклонения
+      - from: DocHub
+        to: User
+        value: Карточка отклонения
+    results:
+      - Информация об отклонениях
+  dochub.user.research:
+    title: Изучение документации
+    triggers:
+      - Просмотр документов
+    steps:
+      - from: User
+        to: DocHub
+        value: Выбор раздела Документы
+      - from: DocHub
+        to: User
+        value: Представление
+    results:
+      - Актуальная информация из документов    

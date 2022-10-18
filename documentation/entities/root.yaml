@@ -1,0 +1,2 @@
+imports:  # Подключение манифестов
+  - interactions/entity.yaml

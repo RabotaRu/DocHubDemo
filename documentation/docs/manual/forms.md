@@ -35,4 +35,4 @@ links:
 ![Карточка компонента](@component/dochub.front.spa.workspace) 
 
 
-[Далее](/docs/dochub.radar)
+[Далее](/docs/dochub.entities)
