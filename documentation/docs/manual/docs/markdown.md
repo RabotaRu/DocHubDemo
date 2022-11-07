@@ -32,12 +32,18 @@
 
 ![Карточка компонента](@component/dochub.front)
 
+
+Пример встраивания объекта кастомной сущности ["Взаимодействия"](/entities/interactions/tree)
+
+![Объект кастомной сущности](@entity/interactions/blank?id=dochub.user.check)
+
 Доступны следующие типы объектов: 
 * @document
 * @context
 * @aspect
 * @component
-* @radar 
+* @radar
+* @entity
 
 Через "/" указывается идентификатор объекта. 
 

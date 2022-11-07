@@ -26,4 +26,4 @@
 
 ![Документ](@document/dochub.example.pml)
 
-[Далее](/docs/dochub.swagger)
+[Далее](/docs/dochub.mermaid)

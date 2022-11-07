@@ -37,6 +37,28 @@ docs:
       - dochub.front.spa.blank
       - dochub.front.spa.blank.doc
     source: plantuml.md
+  dochub.mermaid:
+    location: DocHub/Руководство/Документы/Mermaid
+    description: Mermaid
+    autor: R.Piontik
+    type: markdown
+    subjects:
+      - dochub.front
+      - dochub.front.spa
+      - dochub.front.spa.blank
+      - dochub.front.spa.blank.doc
+    source: mermaid.md
+  dochub.network:
+    location: DocHub/Руководство/Документы/Network
+    description: Network
+    autor: R.Piontik
+    type: markdown
+    subjects:
+      - dochub.front
+      - dochub.front.spa
+      - dochub.front.spa.blank
+      - dochub.front.spa.blank.doc
+    source: network.md
   dochub.asyncapi:
     location: DocHub/Руководство/Документы/AsyncApi
     description: Markdown
@@ -80,6 +102,81 @@ docs:
       - dochub.front.spa.blank
       - dochub.front.spa.blank.doc
     source: examples/example.puml
+  dochub.example.mermaid:
+    type: Mermaid
+    subjects:
+      - dochub.front
+      - dochub.front.spa
+      - dochub.front.spa.blank
+      - dochub.front.spa.blank.doc
+    source: examples/mermaid.mmd
+  dochub.example.network:
+    type: Network
+    subjects:
+      - dochub.front
+      - dochub.front.spa
+      - dochub.front.spa.blank
+      - dochub.front.spa.blank.doc
+    source: >
+      (
+        $manifest := $;
+        /* Перебираем все компоненты */
+        $adges  := $distinct(components.$spread().(
+          $node_id := $keys()[0];
+          $node := $.*;
+          /* Определяем связи */
+          $node.links.{
+            "from": $node_id,
+            "to": id,
+            "label": title
+          }
+        ));
+        /* Выявляем ноды из связей */
+        $nodes := $distinct($append($adges.from, $adges.to)).(
+          $struct := $split($, ".");
+          $group := $replace($, "." & $reverse($struct)[0], "");
+          {
+            "id": $,
+            "label": $lookup($manifest.components, $).title,
+            "group": $group,
+            "level": $count($struct),
+            /* Позиционируем ноду тем выше, чем выше слой */
+            "y": $count($struct) * 200
+          }
+        );
+        /* Добавляем ноды легенды */
+        $nodes := $append($nodes, (
+          /* Получаем максимальную точку позиции нод */
+          $height := $max($nodes.y);
+          $groups := $distinct($nodes.group)^($);
+          /* Вычисляем центр легенды */
+          $offset := -($height / 2);
+          /* Определяем шаг легенды */
+          $step := $height / $count($groups);
+          /* Строим легенду */
+          $map($groups, function($v, $i, $a) {
+            {
+              "id": "legend-" & $string($i),
+              "x": -600,
+              "y": $i * $step + $offset,
+              "shape": "square",
+              "label": $v,
+              "group": $v,
+              "value": 1,
+              "fixed": true,
+              "physics": false
+            }
+          })
+        ));
+        /* Выводим результат */
+        {
+          "nodes": $nodes, /* Массив нод */
+          "edges": $adges, /* Массив связей */
+          "options": {     /* Параметры сетевой диаграммы https://visjs.github.io/vis-network/docs/network/ */
+            "clickToUse": false /* Отключаем обязательный клик перед взаимодействем с пользователем */
+          }
+        }
+      )
   dochub.example.swgr:
     type: OpenAPI
     subjects:
