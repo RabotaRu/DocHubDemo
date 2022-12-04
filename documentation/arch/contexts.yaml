@@ -12,14 +12,10 @@ contexts:   # Контексты представления архитектур
         title: Контейнерная архитектура DocHub
         location: DocHub/Контейнерная архитектура
         components:
-            - dochub.browser.localstorage
-            - dochub.front.spa
-            - dochub.gitlab.api
-            - dochub.gitlab.oauth
-            - dochub.gitlab.repository
-            - dochub.gitlab.gitclient
-            - dochub.plantuml.jar
-            - dochub.plantuml.dot
+            - dochub.browser.*
+            - dochub.front.*
+            - dochub.gitlab.*
+            - dochub.plantuml.*
             - dochub.web
     dochub.front.spa:
         title: Компонентная архитектура DocHub
