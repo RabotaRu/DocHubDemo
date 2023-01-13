@@ -1,2 +1,5 @@
 imports:  # Подключение манифестов
+  # Кастомная сущность
   - interactions/entity.yaml
+  # Расширение сущности - добавляется виджет
+  - extentions/entity.yaml

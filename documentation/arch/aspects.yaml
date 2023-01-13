@@ -2,6 +2,11 @@ aspects: # Архитектурные аспекты
   dochub:
     title: DocHub
     location: DocHub
+    # Кастомные поля для демонстрации работы расширения метамодели
+    # смоти 
+    prodact: Буренин Ольгерт Юрьевич
+    analyst: Семенов Руслан Вазгенович
+    curator: Кучменко Татьяна Вадимовна
   dochub.git:
     title: Git
     location: DocHub/Git
