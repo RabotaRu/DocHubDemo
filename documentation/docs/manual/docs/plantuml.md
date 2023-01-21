@@ -2,7 +2,7 @@
 
 Представляет собой исходные код на языке PlantUML.
 
-```text
+```plantuml
 @startuml
     participant Participant as Foo
     actor       Actor       as Foo1

@@ -6,7 +6,7 @@
 Данными для пострения сети являются константные данные в поле source, [источник данных](/docs/dochub.datasets) или результат запроса JSONata.
 
 Итоговым результатом должна стать структура в соответсвии с [документацией vis.js](https://visjs.github.io/vis-network/docs/network/) :
-```text
+```json
     {
         "nodes": [ /* Перечисление нод https://visjs.github.io/vis-network/docs/network/nodes.html */
             {
@@ -38,7 +38,7 @@
 
 Пример описания сетевой диаграммы:
 
-```text
+```yaml
   ...
   dochub.example.network:
     type: Network

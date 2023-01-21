@@ -2,7 +2,7 @@
 
 Представляет собой исходные код на языке [Mermaid](https://mermaid-js.github.io/mermaid/#/).
 
-```text
+```Mermaid
 C4Context
 title System Context diagram for Internet Banking System
 

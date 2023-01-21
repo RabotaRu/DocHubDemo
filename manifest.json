@@ -1,0 +1,9 @@
+{
+  "name": "DocHub",
+  "short_name": "DocHub",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "description": "Architecture as a code",
+  "background_color": "#ffffff"
+}

@@ -40,7 +40,7 @@ datasets:                       # Источники данных
         [components.$spread().{
             "id": $keys()[0],
             "location": *.title,
-            "link": "/docs/" & $keys()[0]
+            "link": "/architect/components/" & $keys()[0]
         }[$substring(id, 0, 7)="dochub."]^(title)]
       )
 ```
@@ -62,7 +62,7 @@ datasets:
         [components.$spread().{
             "id": $keys()[0],
             "location": *.title,
-            "link": "/docs/" & $keys()[0]
+            "link": "/architect/components/" & $keys()[0]
         }[$substring(id, 0, 7)="dochub."]^(title)]
       )
   dochub.components.l1:         # Выбирает только L1 для архитектурных компонентов DocHub
