@@ -1,0 +1,133 @@
+symbols:
+nodes:
+  node1:
+    title: Node 1
+    symbol: user
+  node1.node1:
+    title: Node 1
+    symbol: user
+  node1.node2:
+    title: Node 2
+    symbol: cloud
+  node1.node3:
+    title: Node 3
+    symbol: database
+  node1.node3.node1:
+    title: Node 1
+    symbol: database
+  node1.node3.node2:
+    title: Node 2
+    symbol: user
+  node2.node2:
+    title: Node 2
+    symbol: cloud
+  node2.node3:
+    title: Node 3
+    symbol: user
+  node2.node3.node1:
+    title: Node 1
+    symbol: database
+  node2.node3.node2:
+    title: Node 1
+    symbol: database
+  node2.node3.node3:
+    title: Node 1
+    symbol: cloud
+  node3:
+    title: Node 3
+    symbol: database
+  node4:
+    title: Node 4
+    symbol: database
+  node5:
+    title: Node 5
+    symbol: database
+  node5.node1:
+    title: Node 1
+    symbol: user
+  node5.node2:
+    title: Node 2
+    symbol: database
+links:
+- from: node2.node3.node1
+  to: node1.node3.node1
+  style: "<->"
+  title: '1'
+- from: node1.node2
+  to: node1.node3.node1
+  style: "<->"
+  title: '2'
+- from: node2.node3.node3
+  to: node1.node3.node1
+  style: "->"
+  title: '3'
+- from: node2.node3.node1
+  to: node2.node3.node2
+  style: "->"
+  title: '4'
+- from: node2.node3.node3
+  to: node2.node2
+  style: "->"
+  title: '5'
+- from: node1.node1
+  to: node2.node2
+  style: "->"
+  title: '6'
+- from: node1.node1
+  to: node1.node3.node2
+  style: "->"
+  title: '7'
+- from: node5.node2
+  to: node1.node3.node2
+  style: "->"
+  title: '8'
+- from: node5.node1
+  to: node1.node3.node2
+  style: "->"
+  title: '9'
+animation:
+  actions:
+    hello:
+    - action: info
+      text: Сейчас начнется сказка!
+    focus1:
+    - action: focus-node
+      target: node1.node3.node1
+    - action: info
+      text: Это самая главная база
+    focus2:
+    - action: focus-node
+      target: node1.node3.node2
+    - action: info
+      text: Это самый крутой пользователь здесь
+    focus3:
+    - action: focus-neighbors
+      target: "^node1\\..*$"
+    - action: info
+      text: Он отвечает за всю это колбасню
+    bay:
+    - action: info
+      text: Надеюсь тебе это так же понравилось как и мне ;)
+    haha:
+    - action: info
+      text: Ха! Ха! Ха!
+    clean:
+    - action: clean
+      target: ".*"
+  scenarios:
+    case1: 
+      title: Кто тут самый крутой?
+      steps:
+      - action: hello
+        delay: 100
+      - action: focus1
+        delay: 100
+      - action: clean
+      - action: focus2
+        delay: 100
+      - action: focus3
+        delay: 100
+      - action: bay
+        delay: 100
+      - action: haha
+      - action: clean

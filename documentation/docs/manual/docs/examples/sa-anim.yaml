@@ -1,0 +1,174 @@
+config:                 
+  distance: 80         
+  trackWidth: 18        
+nodes:
+  # Внешняя среда
+  outside:
+    title: Внешняя среда
+  outside.user:                # Пользователь
+    title: Пользователь
+    symbol: user
+  outside.application:         # FrontEnd приложение
+    title: AndroidApp
+    symbol: system
+
+  # Внутренняя среда
+  inside:                      
+    title: Внутренняя среда    
+  inside.apigateway:           # API шлюз
+    title: API Шлюз      
+    symbol: component      
+  inside.backend:              # Бэкенд
+    title: Backend
+    symbol: component      
+  inside.sso:                 # Сервис авторизации
+    title: SSO
+    symbol: component      
+  inside.logger:              # Подсистема логирования
+    title: Логер
+    symbol: component      
+  inside.postgres:            # База данных для хранения бизнес-данных
+    title: Основная БД
+    symbol: database
+  inside.redis:               # База данных для хранения сессий
+    title: Основная БД
+    symbol: database
+links:           
+  # Внешняя среда         
+  - from: outside.user         # Модифицируем идентификаторы в связях      
+    to: outside.application            
+    style: "<->"    
+
+  # Внутренняя среда
+  - from: outside.application
+    to: inside.apigateway
+    style: "<->"
+  - from: inside.apigateway
+    to: inside.backend
+    style: "<->"    
+  - from: inside.apigateway
+    to: inside.sso
+    style: "<->"
+  - from: inside.backend
+    to: inside.postgres
+    style: "<->"
+  - from: inside.sso
+    to: inside.redis
+    style: "<->"
+  - from: inside.backend
+    to: inside.logger
+    style: "->"
+  - from: inside.apigateway
+    to: inside.logger
+    style: "->"
+
+  # Анимация
+animation:
+  # Здесь создаем именованные действия, которы будут доступны в сценариях
+  actions:
+    hello:                            # Идентификатор действия
+    - action: info                    # Информировать пользователя. Доступны: clean / info / focus-node / focus-neighbors
+      text: Давай я объясню как здесь все устроено   # Текст, который будет выводиться пользователю
+    focus-user:                           
+    - action: focus-node              # Установить фокус на объекте диаграммы
+      target: outside.user            # RegEx выражение определяющее с какими идентификаторами будут выделены элементы диаграммы
+    - action: info                    # Одно действие может иметь пакет команд, которые будут выполнены последовательно
+      text: Это пользователь, которому мы предоставляем услугу
+    focus-frontend:
+    - action: focus-node
+      target: outside.application
+    - action: info
+      text: Для этого он использует наше приложение для Android
+    focus-apigateway:
+    - action: focus-node              # Здесь просим выделить всех соседей
+      target: inside.apigateway       # По маске
+    - action: info
+      text: Все запросы из приложений поступают в шлюз
+    focus-apigateway-neighbors:
+    - action: focus-neighbors         # Подсвечиваем всех соседей
+      target: inside.apigateway       # Шлюза
+    - action: info
+      text: Шлюз маршрутизирует запросы в нужные системы
+    focus-backend:
+    - action: focus-node
+      target: inside.backend
+    - action: info
+      text: Вся бизнес-логика реализуется здесь
+    focus-database:
+    - action: focus-node
+      target: inside.postgres
+    - action: info
+      text: В этой базе данных хранится вся бизнес-информация
+    focus-sso:
+    - action: focus-node
+      target: inside.sso
+    - action: info
+      text: Для авторизации используется отдельный сервис
+    focus-redis:
+    - action: focus-node
+      target: inside.redis
+    - action: info
+      text: Активные сессии пользователей хранятся в этой базе
+    bay:
+    - action: info
+      text: Теперь ты знаешь все.
+    clean:
+    - action: clean                   # Отчистить действия 
+      target: ".*"                    # выполненные над всеми объектами на диаграмме
+    user-about:
+    - action: focus-node
+      target: outside.user
+    - action: info
+      text: Наш пользователь это молодые люди от 18 до 35 лет. Они используют наш сервис для покупки виртуальных вещей в играх.
+  # Из заранее описанных действий создаются сценарии
+  scenarios:
+    about-user:
+      title: Кто наш пользователь?
+      steps:
+      - action: clean
+      - action: user-about
+        delay: 2000
+        voice: true
+      - action: clean
+    explain:                          # Идентификатор сценария
+      title: Объясни мне, что здесь?  # Название сценария для пользователя
+      steps:                          # Шаги 
+      - action: clean
+      - action: hello                 # Идентификатор действия
+        delay: 2000                   # Длительность шага в миллисекундах
+        voice: true                   # Признак голосовой подсказки. Переход на следующий шаг не происходит пока не будет завершен синтез речи
+      - action: focus-user
+        delay: 2000
+        voice: true
+      - action: clean
+      - action: focus-frontend
+        delay: 2000
+        voice: true
+      - action: clean
+      - action: focus-apigateway
+        delay: 2000
+        voice: true
+      - action: focus-apigateway-neighbors
+        delay: 2000
+        voice: true
+      - action: clean
+      - action: focus-backend
+        delay: 2000
+        voice: true
+      - action: clean
+      - action: focus-database
+        delay: 2000
+        voice: true
+      - action: clean
+      - action: focus-sso
+        delay: 2000
+        voice: true
+      - action: clean
+      - action: focus-redis
+        delay: 2000
+        voice: true
+      - action: clean
+      - action: bay
+        delay: 2000
+        voice: true
+

@@ -1,0 +1,63 @@
+config:                 
+  distance: 80         
+  trackWidth: 18        
+nodes:
+  # Внешняя среда
+  outside:
+    title: Внешняя среда
+  outside.user:                # Пользователь
+    title: Пользователь
+    symbol: user
+  outside.application:         # FrontEnd приложение
+    title: AndroidApp
+    symbol: system
+
+  # Внутренняя среда
+  inside:                      
+    title: Внутренняя среда    
+  inside.apigateway:           # API шлюз
+    title: API Шлюз      
+    symbol: component      
+  inside.backend:              # Бэкенд
+    title: Backend
+    symbol: component      
+  inside.sso:                 # Сервис авторизации
+    title: SSO
+    symbol: component      
+  inside.logger:              # Подсистема логирования
+    title: Логер
+    symbol: component      
+  inside.postgres:            # База данных для хранения бизнес-данных
+    title: Основная БД
+    symbol: database
+  inside.redis:               # База данных для хранения сессий
+    title: Основная БД
+    symbol: database
+links:           
+  # Внешняя среда         
+  - from: outside.user         # Модифицируем идентификаторы в связях      
+    to: outside.application            
+    style: "<->"    
+
+  # Внутренняя среда
+  - from: outside.application
+    to: inside.apigateway
+    style: "<->"
+  - from: inside.apigateway
+    to: inside.backend
+    style: "<->"    
+  - from: inside.apigateway
+    to: inside.sso
+    style: "<->"
+  - from: inside.backend
+    to: inside.postgres
+    style: "<->"
+  - from: inside.sso
+    to: inside.redis
+    style: "<->"
+  - from: inside.backend
+    to: inside.logger
+    style: "->"
+  - from: inside.apigateway
+    to: inside.logger
+    style: "->"

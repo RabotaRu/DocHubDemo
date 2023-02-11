@@ -1,6 +1,11 @@
 @startwbs
 * Взаимодействия
 {{#.}}
+{{#link}}
 {{level}} [[{{&link}} {{title}}]]
+{{/link}}
+{{^link}}
+{{level}} {{title}}
+{{/link}}
 {{/.}}
 @endwbs

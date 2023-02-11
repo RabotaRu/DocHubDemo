@@ -1,0 +1,73 @@
+(
+    /* Определяем константы */
+    $rowHeight := 18;
+    $fontHeight := 16;
+    $fontWidth := 10;
+    $padding := 8;
+    /* Определяем фильтр для компонентов архитектуры */
+    $matcher := /^[a-zA-Z]*\.[a-zA-Z]*$/i;
+    /* Сохраняем ссылку на корень манифеста */
+    $manifest := $;
+    /* Готовим список нод */
+    $nodes := $merge(components.$spread().(
+        $id := $split($keys()[0], ".")[1];
+        $matcher($keys()[0])  ? {
+            $id: {
+                "title": *.title,
+                /* Для каждого элемента будет свой символ кроме "actor" */
+                "symbol": 
+                    *.entity = "actor" ? "user" 
+                    : *.aspects ? "symbol-" & $id : "component",
+                /* Получаем список аспектов */
+                "aspects": *.aspects.(
+                    $aspect := $lookup($manifest.aspects, $);
+                    {
+                        "title": $aspect.title,
+                        "id": $
+                    }
+                ),
+                /* Получаем список связей */
+                "links": *.links[$matcher(id)].{
+
+                    "from": $id,
+                    "to": $split(id, ".")[1],
+                    "style": direction,
+                    "title": title
+                }
+            }
+        }
+    )); 
+    /* Готовим символы */
+    $symbols := $merge($nodes.$spread().(
+        $id := "symbol-" & $keys()[0];
+        /* Определяем количество аспектов для вычисления высоты символа */
+        $aspectCount := $count(*.aspects);
+        /* Определяем максимальную длину текста для вычисления ширины символа */
+        $maxTitle := $max(*.aspects.($length($.title)));
+        /* Вычисляем размеры символа */
+        $width := $maxTitle ? $maxTitle * $fontWidth + $padding * 2 : 64; /* Умножаем на ширину символа */   
+        $height := ($aspectCount + 1) * $rowHeight + $padding * 2; /* Умножаем на высоту строки */
+        {
+            $id: /* Генерируем символ */
+                "<g>"
+                    /* Создаем контейнер */
+                    & "<rect width=" & $width & " height=" & $height & " fill=\"#eee\" stroke=\"#222\" rx=3 />"
+                    /* Заполняем аспектами */
+                    & $join($map(*.aspects, function($v, $i) {
+                        "<a href=\"/architect/aspects/" & $v.id & "\" >"
+                        & "<text x=6 y=" & ($i * $rowHeight + $padding + $rowHeight) & " style=\"font-size:" & $fontHeight & "\" fill=\"blue\">" & $v.title & "</text>"
+                        & "</a>"
+                    }))
+                & "</g>"
+        }
+    ));
+    {
+        "config": {
+            "distance": 130,
+            "trackWidth": 24
+        },
+        "symbols": $symbols,
+        "nodes": $nodes,
+        "links": $nodes.*.links
+    }
+  )

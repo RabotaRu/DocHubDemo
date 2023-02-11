@@ -102,6 +102,15 @@ interactions:
       - Актуальная информация из документов    
 ```
 
-Пример представления сущности можно посмотреть [здесь](/entities/interactions/blank?id=dochub.user).
+Пример встраивания сущности в документ:
+```markdown
+![](@entity/interactions/blank?id=dochub.user)
+```
+Результат:
+![](@entity/interactions/blank?id=dochub.user)
+
+Воспользуйтесь правой кнопкой мышки, чтобы вызвать контекстное меню представления и переключить его.
+
+Пример представления сущности в меню [здесь](/entities/interactions/blank?id=dochub.user).
 
 [Далее](/docs/dochub.radar)

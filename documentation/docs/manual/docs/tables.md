@@ -263,4 +263,4 @@ datasets:                       # Источники данных
 Результат:
 ![Предопределенная таблица](@document/dochub.table.dataset.post)
 
-[Далее](/docs/dochub.templates) 
+[Далее](/docs/dochub.smartants) 

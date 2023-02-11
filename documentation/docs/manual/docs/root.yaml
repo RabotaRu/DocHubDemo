@@ -91,9 +91,126 @@ docs:
       - dochub.front.spa.blank
       - dochub.front.spa.blank.doc
     source: tables.md
+  dochub.smartants:
+    location: DocHub/Руководство/Документы/SmartAnts
+    description: SmartAnts
+    autor: R.Piontik
+    type: markdown
+    subjects:
+      - dochub.front
+      - dochub.front.spa
+      - dochub.front.spa.blank
+      - dochub.front.spa.blank.doc
+    source: smartants.md
   # *****************************************  
   #            Примеры документов
   # *****************************************  
+  dochub.smartants.examples.simple:
+    location: DocHub/Руководство/Документы/SmartAnts/01 Простой пример
+    description: Простой пример использования SmartAnts
+    autor: R.Piontik
+    type: smartants           # Тип документа
+    source:                   # Задаем константные данные для генерации диаграммы
+      config:                 # Конфигурируем расположение элементов на диаграмме 
+        distance: 120         # Дистанция между элементами
+        trackWidth: 24        # Ширина дорожек (треков)
+      nodes:                  # Определяем элементы диаграммы
+        system:               # Идентификатор элемента. Определяем иерархию при отображении диаграммы
+          title: Система      # Название компонента
+          symbol: system      # Символ (примитив) которым будет представлен элемент на диаграмме
+        user:
+          title: Пользователь
+          symbol: user
+      links:                    # Связи между компонентами
+        - from: user            # Откуда будет прокладываться маршрут
+          to: system            # Куда
+          title: Логин и пароль # Описание маршрута
+          style: "->"           # Направление маршрута <- / -> / <->
+        - from: system
+          to: user
+          title: JWT токен
+          style: "->"
+  dochub.smartants.examples.domains:
+    location: DocHub/Руководство/Документы/SmartAnts/02 Домены
+    description: Пример диаграммы SmartAnts с доменами
+    autor: R.Piontik
+    type: smartants           
+    source:                   
+      config:                 
+        distance: 120         
+        trackWidth: 24        
+      nodes:
+        inside:                      # Определим домены 
+          title: Внутренняя среда    
+        outside:
+          title: Внешняя среда
+        inside.system:               # Добавим в идентификатор принадлежность к домену "inside"
+          title: Система      
+          symbol: system      
+        outside.user:                # Аналогично для пользователя добавим домен "outside"
+          title: Пользователь
+          symbol: user
+      links:                    
+        - from: outside.user         # Модифицируем идентификаторы в связях      
+          to: inside.system            
+          title: Логин и пароль 
+          style: "->"           
+        - from: inside.system
+          to: outside.user
+          title: JWT токен
+          style: "->"
+  dochub.smartants.examples.complex:
+    location: DocHub/Руководство/Документы/SmartAnts/03 Сложная диаграмма
+    description: Сложная диаграмма SmartAnts
+    autor: R.Piontik
+    type: smartants           
+    source: examples/sa-complex.yaml
+  dochub.smartants.examples.anim:
+    location: DocHub/Руководство/Документы/SmartAnts/04 Анимация
+    description: Анимированная диаграмма SmartAnts
+    autor: R.Piontik
+    type: smartants           
+    source: examples/sa-anim.yaml
+  dochub.smartants.examples.custom-symbol:
+    location: DocHub/Руководство/Документы/SmartAnts/05 Собственные символы
+    description: Кастомные символы SmartAnts
+    autor: R.Piontik
+    type: smartants           
+    source: examples/sa-symbol.yaml
+  dochub.smartants.examples.simple-query:
+    location: DocHub/Руководство/Документы/SmartAnts/06 Простой запрос к данным
+    description: Простой запрос к данным в SmartAnts
+    autor: R.Piontik
+    type: smartants           
+    source: >
+      (
+        /* Определяем фильтр для компонентов архитектуры */
+        $matcher := /^[a-zA-Z]*\.[a-zA-Z]*$/i;
+        /* Генерируем структуру для диаграммы */
+        {
+          /* Формируем ноды из компонентов */
+          "nodes": $merge(components.$spread().(
+            /* Получаем идентификатор компонента */
+            $id := $keys()[0];
+            /* Если идентификатор компонента удовлетворяет фильтру, создаем ноду */
+            $matcher($id) ? {
+                /* Отсекаем домен верхнего уровня для исключения отображения компонентов в иерархии */
+                $split($id, ".")[1]: {
+                    "title": *.title,
+                    /* Преобразуем entity компонентов в понятные диаграмме символы actor -> user */
+                    "symbol": *.entity = "actor" ? "user" : *.entity
+                }
+            }
+
+          ))
+        }
+      )
+  dochub.smartants.examples.complex-query:
+    location: DocHub/Руководство/Документы/SmartAnts/07 Сложный запрос к данным
+    description: Сложный запрос к данным в SmartAnts
+    autor: R.Piontik
+    type: smartants           
+    source: examples/sa-query.jsonata
   dochub.example.pml:
     type: PlantUML
     subjects:
