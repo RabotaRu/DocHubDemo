@@ -7,6 +7,6 @@ components:
     entity: actor
     links:
       - id: dochub.front
-        direction: --
+        direction: <--
         title: Просмотр
 

@@ -126,10 +126,12 @@ docs:
           to: system            # Куда
           title: Логин и пароль # Описание маршрута
           style: "->"           # Направление маршрута <- / -> / <->
+          link: "/docs/dochub.plantuml" # Ссылка перехода при клике на надпись
         - from: system
           to: user
           title: JWT токен
           style: "->"
+          link: "/docs/dochub.swagger"
   dochub.smartants.examples.domains:
     location: DocHub/Руководство/Документы/SmartAnts/02 Домены
     description: Пример диаграммы SmartAnts с доменами

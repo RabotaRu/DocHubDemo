@@ -51,11 +51,11 @@
             $id: /* Генерируем символ */
                 "<g>"
                     /* Создаем контейнер */
-                    & "<rect width=" & $width & " height=" & $height & " fill=\"#eee\" stroke=\"#222\" rx=3 />"
+                    & "<rect width=\"" & $width & "\" height=\"" & $height & "\" fill=\"#eee\" stroke=\"#222\" rx=\"3\" />"
                     /* Заполняем аспектами */
                     & $join($map(*.aspects, function($v, $i) {
                         "<a href=\"/architect/aspects/" & $v.id & "\" >"
-                        & "<text x=6 y=" & ($i * $rowHeight + $padding + $rowHeight) & " style=\"font-size:" & $fontHeight & "\" fill=\"blue\">" & $v.title & "</text>"
+                        & "<text x=\"6\" y=\"" & ($i * $rowHeight + $padding + $rowHeight) & "\" style=\"font-size:" & $fontHeight & "\" fill=\"blue\">" & $v.title & "</text>"
                         & "</a>"
                     }))
                 & "</g>"
@@ -63,7 +63,7 @@
     ));
     {
         "config": {
-            "distance": 130,
+            "distance": 300,
             "trackWidth": 24
         },
         "symbols": $symbols,
