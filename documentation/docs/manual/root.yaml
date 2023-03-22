@@ -110,23 +110,51 @@ docs:
         - dochub.front.spa
         - dochub.front.spa.dataset
       source: jsonata.md
-    dochub.entities:
-      location: DocHub/Руководство/Сущности
-      description: Расширения метамодели
+#**************************************************************
+#                       Сущности
+#**************************************************************
+    dochub.flex_metamodel:
+      location: DocHub/Руководство/Адаптивная метамодель
+      description: Адаптивная метамодель
       type: markdown
       subjects:
         - dochub.front
         - dochub.front.spa
-        - dochub.front.spa.dataset
-      source: entities.md
-    dochub.config:
-      icon: settings
-      location: DocHub/Конфигурирование
-      description: Конфигурирование
+      source: entities/intro.md
+    dochub.flex_metamodel.entities:
+      location: DocHub/Руководство/Адаптивная метамодель/Entity
+      description: Сущность
       type: markdown
       subjects:
         - dochub.front
-      source: config/config.md
+        - dochub.front.spa
+      source: entities/entities.md
+    dochub.flex_metamodel.bundle:
+      location: DocHub/Руководство/Адаптивная метамодель/Metamodel Bundle
+      description: Расширение метамодели
+      type: markdown
+      subjects:
+        - dochub.front
+        - dochub.front.spa
+      source: entities/bundle.md
+    dochub.deployment:
+      icon: settings
+      location: DocHub/Развертывание
+      description: Развертывание
+      type: markdown
+      subjects:
+        - dochub.front
+      source: config/deployment.md
     dochub.context.source:
       type: plantuml
       source: context_source.puml
+#**************************************************************
+#                        Backend
+#**************************************************************
+    dochub.backend:
+      location: DocHub/Руководство/API DocHub
+      description: API сервера DocHub
+      type: OpenAPI
+      subjects:
+        - dochub.backend
+      source: backend/api.yaml

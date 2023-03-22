@@ -33,117 +33,131 @@ entities: # Сущности расширенной матемодели
           )
         presentations:          # Представления объектов сущности. Обязательно.
             tree:               # Идентификатор представления. Каталог взаимодействий в виде дерева.
-                type: plantuml  # Тип представления. Обязательно.
-                template: templates/tree.puml   # Путь к шаблону. Обязательно.
-                title: Каталог взаимодействия   # Человекочитаемое название презентации
-                params:         # jsonscema контроля параметров презентации (опционально)
-                  type: object
-                  properties:
-                    id:         # Необязательный параметр. Если он есть, в дереве подсвечивается сущность
-                      type: string
-                source: >       # Источник данных для рендера шаблона. Возвращает дерево объектов "interactions". Обязательно.
+              type: plantuml  # Тип представления. Обязательно.
+              template: templates/tree.puml   # Путь к шаблону. Обязательно.
+              title: Каталог взаимодействия   # Человекочитаемое название презентации
+              params:         # jsonscema контроля параметров презентации (опционально)
+                type: object
+                properties:
+                  id:         # Необязательный параметр. Если он есть, в дереве подсвечивается сущность
+                    type: string
+              source: >       # Источник данных для рендера шаблона. Возвращает дерево объектов "interactions". Обязательно.
+                (
+                    $set("rpev-id", undefined);
+                    $arrleft := function($arr ,$count) {
+                        $map($arr, function($v, $i) {
+                            $i <= $count ? $v
+                        })
+                    };
+                    $interactions := $.interactions;
+                    [$interactions.$spread().($merge([{"id" : $keys()[0]}, $.*]))^(id).(
+                        $prev_nodes := $split($get("rpev-id"), ".");
+                        $prev_level := $count($prev_nodes);
+                        $curr_nodes := $split(id, ".");
+                        $set("isdiff", false);
+                        $result := $map($curr_nodes, function($v, $i) {(
+                            $set("isdiff", $get("isdiff") or $prev_level = 0 or $prev_level <= $i or $v != $prev_nodes[$i]) ? (
+                                $id := $join($arrleft($curr_nodes, $i), ".");
+                                $interaction :=  $lookup($interactions, $id);
+                                {
+                                    "id": $id,
+                                    "level": $pad("", $i + 2, "*"),
+                                    "title": ($interaction ? $interaction.title : $id),
+                                    "link": $id=$params.id ? undefined : "/entities/interactions/blank?id=" & $id
+                                }
+                            );
+                        )});
+                        $set("rpev-id", id);
+                        $result 
+                    )];
+                )  
+            blank:              # Карточка объекта
+              type: plantuml  # Тип представления
+              title: Диаграмма взаимодействия
+              template: templates/blank.puml
+              params:         
+                type: object
+                properties:
+                  id:
+                    type: string
+                required:
+                  - id
+              source: >       # Источник данных для рендера шаблона. Возвращает объект "interactions" по идентификатору переданному в параметрах.
                   (
-                      $set("rpev-id", undefined);
-                      $arrleft := function($arr ,$count) {
-                          $map($arr, function($v, $i) {
-                              $i <= $count ? $v
+                      $lookup(interactions, $params.id)
+                  )
+            export:              # Экспорт взаимодействия в BPMN диаграмму
+              type: upload     # Специальный тип документа, который выгружает результат генерации документа
+              mimetype: "application/xml" # Тип выгружаемого контента. По умолчанию text/plain. Подробнее https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+              title: Экспорт в BPMN
+              template: templates/bpmn.xml
+              params:         
+                type: object
+                properties:
+                  id:
+                    type: string
+                required:
+                  - id
+              source: >
+                (
+                  $mul := 120;
+                  $lookup(interactions, $params.id).(
+                      $this := $;
+                      $body := {
+                          "id": $params.id,
+                          "start": {
+                              "name": $this.triggers[0],
+                              "stepid": "step0",
+                              "outgoing": "flow0",
+                              "shapey": $mul,
+                              "labely": $mul - 30
+                          },
+                          "steps": $this.steps ~> $map(function($v, $i) { 
+                              {
+                                  "name": $v.value,
+                                  "stepid": "step" & ($i+1),
+                                  "flowid": "flow" & ($i),
+                                  "incoming": "flow" & ($i),
+                                  "outgoing": "flow" & ($i+1),
+                                  "sourceRef": "step" & ($i),
+                                  "targetRef": "step" & ($i+1),
+                                  "shapey": ($i * $mul) + ($mul * 2),
+                                  "flowy": ($i * $mul) + ($mul * 2) - ($i = 0 ? 84 : 40),
+                                  "flowdy": ($i * $mul) + ($mul * 2)
+                              }
                           })
                       };
-                      $interactions := $.interactions;
-                      [$interactions.$spread().($merge([{"id" : $keys()[0]}, $.*]))^(id).(
-                          $prev_nodes := $split($get("rpev-id"), ".");
-                          $prev_level := $count($prev_nodes);
-                          $curr_nodes := $split(id, ".");
-                          $set("isdiff", false);
-                          $result := $map($curr_nodes, function($v, $i) {(
-                              $set("isdiff", $get("isdiff") or $prev_level = 0 or $prev_level <= $i or $v != $prev_nodes[$i]) ? (
-                                  $id := $join($arrleft($curr_nodes, $i), ".");
-                                  $interaction :=  $lookup($interactions, $id);
-                                  {
-                                      "id": $id,
-                                      "level": $pad("", $i + 2, "*"),
-                                      "title": ($interaction ? $interaction.title : $id),
-                                      "link": $id=$params.id ? undefined : "/entities/interactions/blank?id=" & $id
-                                  }
-                              );
-                          )});
-                          $set("rpev-id", id);
-                          $result 
-                      )];
-                  )  
-            blank:              # Карточка объекта
-                type: plantuml  # Тип представления
-                title: Диаграмма взаимодействия
-                template: templates/blank.puml
-                params:         
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                  required:
-                    - id
-                source: >       # Источник данных для рендера шаблона. Возвращает объект "interactions" по идентификатору переданному в параметрах.
-                    (
-                        $lookup(interactions, $params.id)
-                    )
-            export:              # Экспорт взаимодействия в BPMN диаграмму
-                type: upload     # Специальный тип документа, который выгружает результат генерации документа
-                mimetype: "application/xml" # Тип выгружаемого контента. По умолчанию text/plain. Подробнее https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
-                title: Экспорт в BPMN
-                template: templates/bpmn.xml
-                params:         
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                  required:
-                    - id
-                source: >
-                  (
-                    $mul := 120;
-                    $lookup(interactions, $params.id).(
-                        $this := $;
-                        $body := {
-                            "id": $params.id,
-                            "start": {
-                                "name": $this.triggers[0],
-                                "stepid": "step0",
-                                "outgoing": "flow0",
-                                "shapey": $mul,
-                                "labely": $mul - 30
-                            },
-                            "steps": $this.steps ~> $map(function($v, $i) { 
-                                {
-                                    "name": $v.value,
-                                    "stepid": "step" & ($i+1),
-                                    "flowid": "flow" & ($i),
-                                    "incoming": "flow" & ($i),
-                                    "outgoing": "flow" & ($i+1),
-                                    "sourceRef": "step" & ($i),
-                                    "targetRef": "step" & ($i+1),
-                                    "shapey": ($i * $mul) + ($mul * 2),
-                                    "flowy": ($i * $mul) + ($mul * 2) - ($i = 0 ? 84 : 40),
-                                    "flowdy": ($i * $mul) + ($mul * 2)
-                                }
-                            })
-                        };
-                        $step_count := $count($body.steps);
-                        $merge([$body, {
-                            "end": {
-                                "name": $this.results[0],
-                                "stepid": "step" & ($step_count + 1),
-                                "flowid": "flow" & ($step_count),
-                                "incoming": "flow" & ($step_count),
-                                "sourceRef": "step" & ($step_count),
-                                "targetRef": "step" & ($step_count+1),
-                                "shapey": $step_count * $mul + ($mul * 2) + 50,
-                                "labely": $step_count * $mul - 30 + ($mul * 2) + 50,
-                                "flowy": ($step_count * $mul) + ($mul * 2 - 40),
-                                "flowdy": ($step_count * $mul) + ($mul * 2) + 54
+                      $step_count := $count($body.steps);
+                      $merge([$body, {
+                          "end": {
+                              "name": $this.results[0],
+                              "stepid": "step" & ($step_count + 1),
+                              "flowid": "flow" & ($step_count),
+                              "incoming": "flow" & ($step_count),
+                              "sourceRef": "step" & ($step_count),
+                              "targetRef": "step" & ($step_count+1),
+                              "shapey": $step_count * $mul + ($mul * 2) + 50,
+                              "labely": $step_count * $mul - 30 + ($mul * 2) + 50,
+                              "flowy": ($step_count * $mul) + ($mul * 2 - 40),
+                              "flowdy": ($step_count * $mul) + ($mul * 2) + 54
 
-                            }
-                        }])
-                    )
+                          }
+                      }])
+                  )
+                )
+            data:
+              type: upload
+              title: Выгрузка данных JSON
+              params:
+                type: object
+                properties:
+                  id:
+                    type: string
+                required:
+                  - id
+              source: >
+                  (
+                      $lookup(interactions, $params.id)
                   )
         schema:                  # JSON Schema контролирующая описание объекта сущности
             type: object

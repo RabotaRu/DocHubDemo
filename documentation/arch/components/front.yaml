@@ -41,7 +41,7 @@ components:
   dochub.front.spa:
     title: SPA приложение DocHub
     entity: component
-    source: ./main.js
+    source: ./src/frontend/main.js
     technologies:
       - JavaScript
       - VUEJS2
@@ -95,7 +95,7 @@ components:
   dochub.front.spa.vue2: 
     title: VUE2
     entity: component
-    source: ./src/main.js
+    source: ./src/frontend/main.js
     technologies:
       - JavaScript
       - VUE2

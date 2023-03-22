@@ -1,0 +1,14 @@
+imports:
+  - versions.yaml
+entities: 
+    # Версии документации DocHub
+    dochub.versions: 
+        title: Переключение версий DocHub
+        description: Позволяет переключить версию документации DocHub
+        menu: >
+          (
+            [$."dochub.versions". {
+              "location": "Документы/DocHub/Версии " & title,
+              "link": link
+            }]
+          )

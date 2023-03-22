@@ -3,6 +3,21 @@
 Предназначен для описания контрактов. Пример контракта с официального
 [сайта](https://swagger.io/docs/specification/basic-structure/).
 
+Пример описания манифеста документа:
+```yaml
+  ...
+  dochub.example.swgr:
+    type: OpenAPI
+    subjects:
+      - dochub.front
+      - dochub.front.spa
+      - dochub.front.spa.blank
+      - dochub.front.spa.blank.doc
+    source: examples/example.yaml
+  ...
+```
+
+Пример тела документа: 
 ```yaml
 openapi: 3.0.0
 info:
