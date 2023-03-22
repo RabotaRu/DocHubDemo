@@ -8,7 +8,7 @@ entities:
         menu: >
           (
             [$."dochub.versions". {
-              "location": "Документы/DocHub/Версии " & title,
+              "location": "Документы/DocHub/Версия " & title,
               "link": link
             }]
           )
