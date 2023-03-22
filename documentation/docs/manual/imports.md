@@ -62,7 +62,7 @@ imports:
 * **docs/root.yaml** - путь к файлу.
 
 
-Также возможно подключение внешних внешних ресурсов по https/https:
+Также возможно подключение внешних ресурсов по https/https:
 ```yaml
 imports:
   - https://dochub.info/documentation/root.yaml
