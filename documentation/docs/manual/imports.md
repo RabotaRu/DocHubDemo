@@ -32,7 +32,7 @@ imports:
   - namespaces.yaml   # устарело
 ```
 
-Манифест компонентов (components.yaml) может быть таким:
+В этом случае, манифест компонентов (components.yaml) может быть таким:
 ```yaml
 components:
   ...
@@ -48,25 +48,6 @@ components:
 ```
 
 Подключение дополнительных манифестов возможно из сторонних репозиториев **того же** инстанса GitLab,
-а также с web-ресурсов по http/https протоколу. Например:
-
-```yaml
-imports:
-  - gitlab:34:main@docs/root.yaml
-```
-
-Где:
-* **gitlab** -  схема;
-* **34** - идентификатор репозитория (см. в gitlab);
-* **main** - ветка;
-* **docs/root.yaml** - путь к файлу.
-
-
-Также возможно подключение внешних ресурсов по http/https:
-```yaml
-imports:
-  - https://dochub.info/documentation/root.yaml
-```
-
+а также с web-ресурсов по http/https протоколу. 
 
 [Далее](/docs/dochub.components)

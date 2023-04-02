@@ -5,8 +5,9 @@ components:
   dochub.front:             # Идентификатор компонента
     title: DocHub           # Название компонента
     entity: component       # Сущность компонента из PlantUML (https://plantuml.com/ru/deployment-diagram)
-    source: ./              # Произвольное поле определенное в forms указывающее на исходный код
-    expert: R.Piontik       # Эксперт по компоненту
+    source: ./              # Произвольное поле. Указывающее на исходный код.
+    expert: R.Piontik       # Произвольное поле. Эксперт по компоненту.
+    criticality: 1          # Произвольное поле. Уровень критичности компонента.
     technologies:           # Используемые технологии
       - JavaScript
       - VUEJS2
@@ -42,6 +43,7 @@ components:
     title: SPA приложение DocHub
     entity: component
     source: ./src/frontend/main.js
+    criticality: 1
     technologies:
       - JavaScript
       - VUEJS2
@@ -86,6 +88,7 @@ components:
     title: Интерфейс пользователя
     entity: actor
     source: ./src/components/Root.vue
+    criticality: 1
     technologies:
       - JavaScript
       - VUE2
@@ -142,6 +145,7 @@ components:
     title: JSONata
     entity: component
     source: ./src/manifest/query.js
+    criticality: 1
     technologies:
       - JavaScript
       - VUE2
@@ -153,6 +157,7 @@ components:
     title: Manifest parser
     entity: component
     source: ./src/manifest/manifest_parser.js
+    criticality: 1
     technologies:
       - JavaScript
       - VUE2
@@ -166,12 +171,14 @@ components:
   dochub.front.spa.manifest_data:
     title: Данные манифеста
     entity: interface
+    criticality: 1
     technologies:
       - Axios
   dochub.front.spa.blank:
     title: Карточка объекта
     entity: component
     source: ./src/Architecture/*
+    criticality: 1
     technologies:
       - JavaScript
       - VUE2
@@ -189,6 +196,7 @@ components:
     title: Тех. радар
     entity: component
     source: ./src/Techradar/*
+    criticality: 1
     technologies:
       - JavaScript
       - VUE2
@@ -196,6 +204,7 @@ components:
     title: Карточка аспекта
     entity: component
     source: ./src/Architecture/Aspect.vue
+    criticality: 1
     technologies:
       - JavaScript
       - VUE2
@@ -203,6 +212,7 @@ components:
     title: Карточка компонента
     entity: component
     source: ./src/Architecture/Component.vue
+    criticality: 1
     technologies:
       - JavaScript
       - VUE2
@@ -210,6 +220,7 @@ components:
     title: Карточка контекста
     entity: component
     source: ./src/Architecture/Context.vue
+    criticality: 1
     technologies:
       - JavaScript
       - VUE2
@@ -217,6 +228,7 @@ components:
     title: Карточка документа
     entity: component
     source: ./src/Docs/*
+    criticality: 1
     technologies:
       - JavaScript
       - VUE2
@@ -224,6 +236,7 @@ components:
     title: Markdown
     entity: component
 #    source: ./src/Docs/DocMarkdown.vue
+    criticality: 1
     technologies:
       - JavaScript
       - VUE2
@@ -232,6 +245,7 @@ components:
     title: AsyncApi
     entity: component
     source: ./src/Docs/DocAsyncApi.vue
+    criticality: 1
     technologies:
       - JavaScript
       - VUE2
@@ -240,6 +254,7 @@ components:
     title: Swagger
     entity: component
     source: ./src/Docs/DocSwagger.vue
+    criticality: 1
     technologies:
       - JavaScript
       - VUE2
@@ -248,6 +263,7 @@ components:
     title: Таблицы
     entity: component
     source: ./src/Docs/DocTable.vue
+    criticality: 1
     technologies:
       - JavaScript
       - VUE2
@@ -255,6 +271,7 @@ components:
     title: Источники данных
     entity: component
     source: ./src/helpers/datasets.js
+    criticality: 1
     technologies:
       - JavaScript
       - VUE2
@@ -268,5 +285,6 @@ components:
   dochub.front.spa.dataset_http:
     title: Внешние данные
     entity: interface
+    criticality: 1
     technologies:
       - Axios

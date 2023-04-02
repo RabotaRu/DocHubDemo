@@ -178,16 +178,40 @@ docs:
         (
             $[from="VUEX" or to="VUEX"]
         )
+  dochub.table.multi_dependencies:        # Табличный документ на основании источника данных с множественными зависимостями
+    type: table
+    headers:
+      - value: from
+        text: Система 1
+        sortable: true
+        align: left
+        width: 20%
+        link: link-from
+      - value: to
+        text: Система 2
+        sortable: true
+        align: left
+        width: 20%
+        link: link-to
+      - value: direction
+        text: Связь
+        sortable: true
+        align: center
+        width: 5%
+      - value: title
+        text: Описание
+        sortable: true
+        align: left
+      - value: criticality
+        text: Критичность связи
+        sortable: true
+        align: left
+    source: dochub.multi_dependencies
 datasets:                       # Источники данных
-  dochub.docs:                  # Возвращает список всех документов
-    source: >                     # Выводит все документы
-      (
-        [docs.$spread().{
-          "location": *.location,
-          "link": "/docs/" & $keys()[0]
-        }[location]^(location)]
-      )
-  dochub.components.criticality:  # Определяет уровни критичности
+  # **********************************************
+  #     Источник с предопределенными данными
+  # **********************************************
+  dochub.components.criticality:    # Определяет уровни критичности
     source:                         # Предопределенные данные
       - id: k1
         title: Уровень K1
@@ -197,7 +221,23 @@ datasets:                       # Источники данных
         title: Уровень K3
       - id: k4
         title: Уровень K4
-  dochub.components:            # Возвращает все архитектурные компоненты DocHub
+
+  # **********************************************
+  #   Источники с запросами к данным архитектуры
+  # **********************************************
+
+  # Возвращает список всех документов
+  dochub.docs:                    
+    source: >                     # Выводит все документы
+      (
+        [docs.$spread().{
+          "location": *.location,
+          "link": "/docs/" & $keys()[0]
+        }[location]^(location)]
+      )
+
+  # Возвращает все архитектурные компоненты DocHub
+  dochub.components:            
     source: >                     # JSONata запрос к архитектуре
       (
         [components.$spread().{
@@ -206,12 +246,20 @@ datasets:                       # Источники данных
             "link": "/architect/components/" & $keys()[0]
         }[$substring(id, 0, 7)="dochub."]^(title)]
       )
-  dochub.components.l1:         # Выбирает только L1 для архитектурных компонентов DocHub
-    origin: dochub.components   # Базовый источник данных
+
+  # **********************************************
+  # Источники с зависимостями от других источников
+  # **********************************************
+
+  # Выбирает только L1 для архитектурных компонентов DocHub
+  dochub.components.l1:         
+    origin: dochub.components     # Базовый источник данных
     source: >                     # JSONata запрос к архитектуре
       ($[$count($split(id, "."))=2])
-  dochub.integrations:          # Базовый источник данных интеграций
-    source: >                   # JSONata запрос к архитектуре
+
+  # Базовый источник данных интеграций
+  dochub.integrations:
+    source: >                     # JSONata запрос к архитектуре
       (
         $MANIFEST := $;
         $distinct([components.$spread().(
@@ -228,4 +276,37 @@ datasets:                       # Источники данных
                 "direction": direction
             };
         )])^(from)
+      )
+
+  # **********************************************
+  # Источники с множественными зависимостями
+  # **********************************************
+  dochub.multi_dependencies:
+    origin:
+      integrations: dochub.integrations             # Указываем зависимость от источника "dochub.integrations"
+      criticality: dochub.components.criticality    # Указываем зависимость от источника "dochub.components.criticality"
+      manifest: "($)"                               # Указывается зависимость от результата запроса JSONata - "($)"
+    source: >
+      (
+        /* Сохраняем контекст для использования в глубине */
+        $CONTEXT := $;
+
+        /* Обрабатываем данные подготовленные источником "dochub.integrations" */
+        integrations.(
+            /* Восстанавливаем ID компонента, чтобы получить по нему данные */
+            $ID_FROM := $reverse($split($."link-from", "/"))[0];
+            $ID_TO := $reverse($split($."link-to", "/"))[0];
+
+            /* Получаем данные критичности */
+            $CRITICALLY_FROM := $lookup($CONTEXT.manifest.components, $ID_FROM).criticality;
+            $CRITICALLY_FROM := $CRITICALLY_FROM ? $CRITICALLY_FROM : 4;
+            $CRITICALLY_TO := $lookup($CONTEXT.manifest.components,$ID_TO).criticality;
+            $CRITICALLY_TO := $CRITICALLY_TO ? $CRITICALLY_TO : 4;
+            $CRITICALLY := $CRITICALLY_FROM < $CRITICALLY_TO ? $CRITICALLY_FROM : $CRITICALLY_TO;
+
+            /* Обогащаем данные DataSet "dochub.integrations" информацией о критичности связи */
+            $merge([$, {
+                "criticality": $CONTEXT.criticality[id="k" & $CRITICALLY].title
+            }])
+        );
       )
