@@ -100,7 +100,7 @@ DocHub.documents.register('html', doc);
 ### HTMLDocument.vue
 
 Файл содержит [VUE2 компонент](https://ru.vuejs.org/v2/guide/components.html). Его задачей является
-рендеринг данных архитектуры в соответсвии с переданными ему параметрами в "profile".
+рендеринг данных архитектуры в соответствии с переданными ему параметрами в "profile".
 
 ```JavaScript
 <template>
