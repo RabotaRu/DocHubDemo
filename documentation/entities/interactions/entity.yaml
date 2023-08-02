@@ -82,12 +82,12 @@ entities: # Сущности расширенной матемодели
                     type: string
                 required:
                   - id
-              source: >       # Источник данных для рендера шаблона. Возвращает объект "interactions" по идентификатору переданному в параметрах.
+              source: >                   # Источник данных для рендера шаблона. Возвращает объект "interactions" по идентификатору переданному в параметрах.
                   (
                       $lookup(interactions, $params.id)
                   )
-            export:              # Экспорт взаимодействия в BPMN диаграмму
-              type: upload     # Специальный тип документа, который выгружает результат генерации документа
+            export:                       # Экспорт взаимодействия в BPMN диаграмму
+              type: upload                # Специальный тип документа, который выгружает результат генерации документа
               mimetype: "application/xml" # Тип выгружаемого контента. По умолчанию text/plain. Подробнее https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
               title: Экспорт в BPMN
               template: templates/bpmn.xml
@@ -163,67 +163,89 @@ entities: # Сущности расширенной матемодели
             type: object
             patternProperties:
                 "[a-zA-Z0-9_]*(\\.[a-zA-Z0-9_]*)*$": # Шаблон ключа
-                    type: array
-                    minItems: 1
-                    items:
-                        type: object
-                        properties:
-                            icon:
-                                title: Иконка
-                                type: string
-                                minLength: 2
-                            title:
-                                title: Наименование
+                    type: object
+                    properties:
+                        icon:
+                            title: Иконка
+                            type: string
+                            minLength: 2
+                        title:
+                            title: Наименование
+                            type: string
+                            minLength: 5
+                        triggers:
+                            title: События запускающие взаимодействие
+                            type: array
+                            minItems: 1
+                            items:
                                 type: string
                                 minLength: 5
-                            triggers:
-                                title: События запускающие взаимодействие
-                                type: array
-                                minItems: 1
-                                items:
-                                    type: string
-                                    minLength: 5
-                            steps:
-                                title: Описание взаимодействия
-                                type: array
-                                minItems: 1
-                                items:
-                                    type: object
-                                    properties:
-                                        from:
-                                            title: От кого
-                                            type: string
-                                            minLength: 1
-                                        to:
-                                            title: Кому
-                                            type: string
-                                            minLength: 1
-                                        value:
-                                            title: Что
-                                            type: string
-                                            minLength: 1
-                                    required:
-                                        - from
-                                        - to
-                                        - value
-                            results:
-                                title: Результаты взаимодействия
-                                type: array
-                                minItems: 1
-                                items:
-                                    type: string
-                                    minLength: 5
-                        required:
-                            - title
-                            - triggers
-                            - results
-                            - steps
+                        steps:
+                            title: Описание взаимодействия
+                            type: array
+                            minItems: 1
+                            items:
+                                type: object
+                                properties:
+                                    from:
+                                        title: От кого
+                                        type: components.component # Указываем, что данное поле должно содержать идентификатор объекта сущности components
+                                    to:
+                                        title: Кому
+                                        type: components.component
+                                    value:
+                                        title: Что
+                                        type: string
+                                        minLength: 1
+                                    sub-interactions: # Ссылку на вложенное взаимодействие
+                                      title: Вложенное взаимодействие
+                                      $ref: "#/$rels/interactions.interaction"
+                                required:
+                                    - from
+                                    - to
+                                    - value
+                        results:
+                            title: Результаты взаимодействия
+                            type: array
+                            minItems: 1
+                            items:
+                                type: string
+                                minLength: 5
+                    required:
+                        - title
+                        - triggers
+                        - results
+                        - steps
+        objects:                    # Декларирование объектов сущности
+          interaction:              # Объектом сущности является взаимодействие - "interaction"
+            route: "/"              # Путь к массиву объектов в Data Lake относительно пути /interactions
+                                    # Если route не указан, то по умолчанию он равен "/"
+            title: Взаимодействие   # Название объекта
+            # JSONata генератор символа в svg для представления в диаграммах.
+            #  $object  - передается объект рендеринга. Может быть не определен. В этом случае, необходимо вернуть неспецифичный (общий) символ объекта.
+            #  $        - Data Lake архитектуры. Может быть не определен, если Data Lake недоступен.
+            #
+            # Если символ не определен, будет использован символ по умолчанию.
+            symbol: >
+              (
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64px" height="64px">'
+                  & '<path d="M 16 3 C 14.148438 3 12.59375 4.285156 12.144531 6 L 6 6 L 6 12 L 3 12 L 3 20 L 6 20 L 6 26 L 12.144531 26 '
+                  & 'C 12.59375 27.714844 14.148438 29 16 29 C 17.851563 29 19.40625 27.714844 19.855469 26 L 26 26 L 26 20 L 29 20 L 29 '
+                  & '12 L 26 12 L 26 6 L 19.855469 6 C 19.40625 4.285156 17.851563 3 16 3 Z M 16 5 C 17.117188 5 18 5.882813 18 7 C 18 '
+                  & '8.117188 17.117188 9 16 9 C 14.882813 9 14 8.117188 14 7 C 14 5.882813 14.882813 5 16 5 Z M 8 8 L 12.144531 8 C 12.59375 '
+                  & '9.714844 14.148438 11 16 11 C 17.851563 11 19.40625 9.714844 19.855469 8 L 24 8 L 24 12 L 21 12 L 21 20 L 24 20 L 24 24 '
+                  & 'L 19.855469 24 C 19.40625 22.285156 17.851563 21 16 21 C 14.148438 21 12.59375 22.285156 12.144531 24 L 8 24 L 8 20 L 11 '
+                  & '20 L 11 12 L 8 12 Z M 5 14 L 9 14 L 9 18 L 5 18 Z M 23 14 L 27 14 L 27 18 L 23 18 Z M 16 23 C 17.117188 23 18 23.882813 '
+                  & '18 25 C 18 26.117188 17.117188 27 16 27 C 14.882813 27 14 26.117188 14 25 C 14 23.882813 14.882813 23 16 23 Z"/>'
+                & '</svg>''
+              )
+
 # Использование сущности расширенной метамодели
 interactions:
   dochub:
     title: DocHub 
   dochub.user:
-    title: Взаимодействия с пользователем
+    title: Пользовательский путь
     triggers:
       - Просмотр архитектуры
     steps:
@@ -236,7 +258,7 @@ interactions:
     results:
       - Информация о существующей архитектуре
   dochub.user.check:
-    title: Прверка отклонений выявленных валидаторами
+    title: Проверка отклонений выявленных валидаторами
     triggers:
       - Просмотр архитектуры
     steps:
@@ -266,4 +288,48 @@ interactions:
         to: User
         value: Представление
     results:
-      - Актуальная информация из документов    
+      - Актуальная информация из документов
+
+  # Пример ссылок на объекты сущности
+  dochub.customer:
+    title: Клиентский путь
+  dochub.customer.promotion:
+    title: Продвижение
+  dochub.customer.promotion.article:
+    title: Статья на Хабре
+    triggers:
+      - Выдача в поиске
+    results:
+      - Переход в репозиторий
+    steps:
+      - from: Хабр
+        to: Клиент
+        value: Анализ новых статей
+      - from: Клиент
+        to: Хабр
+        value: Чтение статьи о DocHub
+      - from: Клиент
+        to: Репозиторий
+        value: Переход в репозиторий
+
+  dochub.customer.deployment:
+    title: Разворачивание DocHub
+    triggers:
+      - Первое знакомство с DocHub
+    results:
+      - Потенциальный клиент (лид)
+    steps:
+      - from: Клиент
+        to: Статьи
+        value: Получение информации о DocHub
+        sub-interactions: dochub.customer.promotion.article # Здесь ссылка на взаимодействие пользователя со статьями
+      - from: Клиент
+        to: Репозиторий
+        value: Изучение инструкции
+      - from: Клиент
+        to: Репозиторий
+        value: Развертывание
+      - from: Клиент
+        to: DocHub
+        value: Первый опыт
+    

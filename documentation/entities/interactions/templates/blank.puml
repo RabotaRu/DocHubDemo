@@ -5,7 +5,7 @@ title {{title}}
 group {{#triggers}}{{.}}, {{/triggers}}
 {{/triggers}}
     {{#steps}}
-    "{{from}}" --> "{{to}}": {{value}}
+    "{{from}}" --> "{{to}}": {{#sub-interactions}}[[/entities/interactions/blank?id={{sub-interactions}} {{value}}]]{{/sub-interactions}}{{^sub-interactions}}{{value}}{{/sub-interactions}}
     {{/steps}}
     {{#results}}
     note across: {{#results}}{{.}}, {{/results}}

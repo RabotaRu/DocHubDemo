@@ -16,6 +16,12 @@
     autor: R.Piontik
     type: smartants           # Тип документа
     source:                   # Задаем константные данные для генерации диаграммы
+      header:                 # Заголовок диаграммы
+        title: вторизация    # Текст заголовка
+        style:                # Стили заголовка
+          color: "#fbaaaa"
+          font-size: 22px
+          font-weight: 800
       config:                 # Конфигурируем расположение элементов на диаграмме 
         distance: 120         # Дистанция между элементами
         trackWidth: 24        # Ширина дорожек (треков)
@@ -54,6 +60,30 @@
 
 Клик на кнопке "Свернуть связи в жгуты" приведет к упрощению диаграммы. Останется только одна связь, наглядно демонстрирующая о наличии 
 взаимодействия объектов, но скрывающая детали. Это очень удобно для анализа обширных ландшафтов с большим количеством связей.
+
+Есть возможность указать цвет связей:
+
+```yaml
+  ...
+  dochub.smartants.examples.simple:
+      ...
+      links:                    # Связи между компонентами
+        - from: user            
+          to: system            
+          title: Логин и пароль 
+          style: "-[#ff0000]->"         # Указывается цвет линии через RGB
+          link: "/docs/dochub.plantuml" 
+        - from: system
+          to: user
+          title: JWT токен
+          style: "-[#green]->"         # Указывается цвет линии через alias
+          link: "/docs/dochub.swagger"
+  ...
+```
+
+Результат:
+
+![Цвет связей](@document/dochub.smartants.examples.colors)
 
 ## Отображение элементов с иерархией
 
@@ -373,7 +403,8 @@ nodes:
     {
         "config": {
             "distance": 130,
-            "trackWidth": 24
+            "trackWidth": 24,
+            "lineWidthLimit": 2     # Лимит толщиный жгута
         },
         "symbols": $symbols,
         "nodes": $nodes,

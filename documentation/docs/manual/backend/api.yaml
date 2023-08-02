@@ -57,6 +57,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/JSONataResult'
+  /core/storage/reload?secret={reloadSecret}:
+    put:
+      tags:
+      - DataLake
+      summary: Выполняет запрос перезагрузки данным архитектуры
+      parameters:
+        - in: path
+          name: reloadSecret
+          description: secret для доступа к запросу. Указывается в .env переменной VUE_APP_DOCHUB_RELOAD_SECRET
+          required: true
+          schema:
+            $ref: '#/components/schemas/JSONataQuery'
+          example: '12345'
+      responses:
+        "200":
+          description: "Результат выполнения запроса"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONataResult'
   /core/storage/release-data-profile/{path}:
     get:
       tags:
@@ -150,10 +170,10 @@ components:
       pattern: '^\/[a-zA-Z][a-zA-Z\_0-9]*(\/[a-zA-Z][a-zA-Z\_0-9]*)*$'
     EntityID: 
       type: string
-      pattern: '^[a-zA-Z\_0-9]$'
+      pattern: '^[a-zA-Z][a-zA-Z\_0-9]*$'
     PresentationID: 
       type: string
-      pattern: '^[a-zA-Z\_0-9]$'
+      pattern: '^[a-zA-Z][a-zA-Z\_0-9]*$'
     EntityParam:
       type: string
     ProblemsResult:

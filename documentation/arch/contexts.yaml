@@ -49,5 +49,6 @@ contexts:   # Контексты представления архитектур
         title: Диаграмма взаимодействия DocHub
         icon: settings_ethernet
         location: DocHub/Диаграмма взаимодействия
+        presentation: plantuml
         uml: ../docs/sequence.puml
 

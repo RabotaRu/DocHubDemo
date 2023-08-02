@@ -1,5 +1,5 @@
 @startwbs
-* Взаимодействия
+* [[/entities/docs/blank?dh-doc-id=dochub.flex_metamodel.entities Примеры созданных пользовательских сущностей "Взаимодействия"]]
 {{#.}}
 {{#link}}
 {{level}} [[{{&link}} {{title}}]]

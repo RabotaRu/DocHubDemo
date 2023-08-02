@@ -1,0 +1,72 @@
+config:                 
+  distance: 80         
+  trackWidth: 18        
+nodes:
+  # Первый уровень
+  third-level.second-level.first-level:
+    title: 1-ый уровень
+  third-level.second-level.first-level.user:
+    title: Пользователь
+    symbol: user
+  third-level.second-level.first-level.application:
+    title: AndroidApp
+    symbol: system
+
+  # Второй уровень
+  third-level.second-level:
+    title: 2-ой уровень
+  third-level.second-level.developer:
+    title: Разработчик
+    symbol: user
+  third-level.second-level.tester:
+    title: Тестировщик
+    symbol: user
+
+  # Третий уровень
+  third-level:
+    title: 3-ий уровень
+  third-level.arch:
+    title: Архитектор
+    symbol: user
+  third-level.manager:
+    title: Менеджер
+    symbol: user
+
+  # Внешняя среда
+  outside:
+    title: Внешняя среда
+  outside.customer:
+    title: Заказчик
+    symbol: user
+
+links:           
+  # Внешняя среда         
+  - from: outside
+    to: third-level
+    style: "<->" 
+  - from: outside.customer
+    to: third-level.manager
+    style: "<->" 
+  - from: third-level.arch
+    to: third-level.manager
+    style: "<->" 
+  - from: third-level.arch
+    to: third-level.second-level.developer
+    style: "<->" 
+  - from: third-level.second-level.tester
+    to: third-level.second-level.developer
+    style: "<->" 
+  - from: outside
+    to: third-level.second-level.first-level
+    style: "<->" 
+  - from: third-level.second-level.first-level.user
+    to: third-level.second-level.first-level.application
+    style: "<->" 
+  - from: third-level.second-level.first-level.application
+    to: outside.customer
+    style: "->" 
+  - from: third-level.second-level
+    to: outside.customer
+    style: "<->" 
+
+
