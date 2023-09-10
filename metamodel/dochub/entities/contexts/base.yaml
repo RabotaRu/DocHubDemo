@@ -71,7 +71,6 @@ entities:
                   pattern: "\\s*\\((.|\\s)*\\)\\s*"
           required:
             - title
-            - components
       additionalProperties: false
     menu: >
       (
@@ -80,7 +79,8 @@ entities:
             {
                 "title": "Контексты",
                 "location": 'Архитектура/Контексты',
-                "icon": 'location_searching'
+                "icon": 'location_searching',
+                "link": "entities/contexts/tree"
             }
           ],
           contexts.$spread().(

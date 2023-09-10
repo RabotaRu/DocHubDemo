@@ -1,0 +1,5 @@
+imports:
+#  - http://localhost:8080/metamodel/root.yaml
+#  - http://localhost:8080/documentation/root.yaml
+#  - https://dochub.info/documentation/root.yaml
+#  - root.yaml

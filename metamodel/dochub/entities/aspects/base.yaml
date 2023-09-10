@@ -43,5 +43,25 @@ entities:
           )
     menu: >
       (
-        []
+        $aspects := aspects;
+        $makeLocation := function($id) {(
+            $arrleft := function($arr ,$count) {
+                $map($arr, function($v, $i) {
+                  $i <= $count ? $v
+                })
+            };
+            $domains := $split($id, ".");
+            "Архитектура/Аспекты/" & $join($map($domains, function($domain, $index) {(
+                $lookup($aspects, $join($arrleft($domains, $index), ".")).title
+            )}), "/");
+        )};
+        [$append([{
+            "link": "/entities/aspects/tree", /* Ссылка на форму представления аспектов в виде дерева */
+            "location": "Архитектура/Аспекты" /* Расположение в меню */
+          }],
+          [$aspects.$spread().{
+              "link": "/entities/aspects/blank?dh-aspect-id=" & $keys()[0],     /* Формируем ссылку на карточку */
+              "location": $makeLocation($keys()[0])                             /* Формируем расположение в меню */
+          }][location]
+        )];
       )

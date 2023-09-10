@@ -7,6 +7,8 @@ entities:
         # Добавляем собственный виджет
         widgets:
           outside_links: # Идентификатор виджета
+            # Иконка виджета
+            icon: settings
             # Название виджета
             title: Кто зависит от этого компонента
             # Идентификатор презентации, которая будет использоваться в виджете
@@ -83,6 +85,10 @@ entities:
             title: Люди
             presentation: people
             align: "<"
+
+            style:
+              border: true
+              margin: 4px
       people:
         params:
           type: object
