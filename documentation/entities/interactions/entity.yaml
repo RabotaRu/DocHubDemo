@@ -84,7 +84,7 @@ entities: # Сущности расширенной матемодели
                   - id
               source: >                   # Источник данных для рендера шаблона. Возвращает объект "interactions" по идентификатору переданному в параметрах.
                   (
-                      $lookup(interactions, $params.id)
+                      $lookup(interactions, $params.id) ~> | steps | {"from": $lookup($$.components, from).title, "to": $lookup($$.components, to).title}|
                   )
             export:                       # Экспорт взаимодействия в BPMN диаграмму
               type: upload                # Специальный тип документа, который выгружает результат генерации документа
@@ -189,10 +189,10 @@ entities: # Сущности расширенной матемодели
                                 properties:
                                     from:
                                         title: От кого
-                                        type: components.component # Указываем, что данное поле должно содержать идентификатор объекта сущности components
+                                        $ref: "#/$rels/components.component" # Указываем, что данное поле должно содержать идентификатор объекта сущности components
                                     to:
                                         title: Кому
-                                        type: components.component
+                                        $ref: "#/$rels/components.component"
                                     value:
                                         title: Что
                                         type: string
@@ -213,9 +213,6 @@ entities: # Сущности расширенной матемодели
                                 minLength: 5
                     required:
                         - title
-                        - triggers
-                        - results
-                        - steps
         objects:                    # Декларирование объектов сущности
           interaction:              # Объектом сущности является взаимодействие - "interaction"
             route: "/"              # Путь к массиву объектов в Data Lake относительно пути /interactions
@@ -249,11 +246,11 @@ interactions:
     triggers:
       - Просмотр архитектуры
     steps:
-      - from: User
-        to: DocHub
+      - from: dochub.user
+        to: dochub
         value: Вход на портал
-      - from: DocHub
-        to: User
+      - from: dochub
+        to: dochub.user
         value: Представление архитектурных артефактов
     results:
       - Информация о существующей архитектуре
@@ -262,17 +259,17 @@ interactions:
     triggers:
       - Просмотр архитектуры
     steps:
-      - from: User
-        to: DocHub
+      - from: dochub.user
+        to: dochub
         value: Выбор раздела Проблемы
-      - from: DocHub
-        to: User
+      - from: dochub
+        to: dochub.user
         value: Генерация дерева со статусами
-      - from: User
-        to: DocHub
+      - from: dochub.user
+        to: dochub
         value: Выбор отклонения
-      - from: DocHub
-        to: User
+      - from: dochub
+        to: dochub.user
         value: Карточка отклонения
     results:
       - Информация об отклонениях
@@ -281,11 +278,11 @@ interactions:
     triggers:
       - Просмотр документов
     steps:
-      - from: User
-        to: DocHub
+      - from: dochub.user
+        to: dochub
         value: Выбор раздела Документы
-      - from: DocHub
-        to: User
+      - from: dochub
+        to: dochub.user
         value: Представление
     results:
       - Актуальная информация из документов
@@ -302,14 +299,14 @@ interactions:
     results:
       - Переход в репозиторий
     steps:
-      - from: Хабр
-        to: Клиент
+      - from: interactions.example.habr
+        to: interactions.example.dochub.customer
         value: Анализ новых статей
-      - from: Клиент
-        to: Хабр
+      - from: interactions.example.dochub.customer
+        to: interactions.example.habr
         value: Чтение статьи о DocHub
-      - from: Клиент
-        to: Репозиторий
+      - from: interactions.example.dochub.customer
+        to: dochub.gitlab.repository
         value: Переход в репозиторий
 
   dochub.customer.deployment:
@@ -319,17 +316,43 @@ interactions:
     results:
       - Потенциальный клиент (лид)
     steps:
-      - from: Клиент
-        to: Статьи
+      - from: interactions.example.dochub.customer
+        to: interactions.example.habr.articles
         value: Получение информации о DocHub
         sub-interactions: dochub.customer.promotion.article # Здесь ссылка на взаимодействие пользователя со статьями
-      - from: Клиент
-        to: Репозиторий
+      - from: interactions.example.dochub.customer
+        to: dochub.gitlab.repository
         value: Изучение инструкции
-      - from: Клиент
-        to: Репозиторий
+      - from: interactions.example.dochub.customer
+        to: dochub.gitlab.repository
         value: Развертывание
-      - from: Клиент
-        to: DocHub
+      - from: interactions.example.dochub.customer
+        to: dochub
         value: Первый опыт
-    
+
+components:
+  interactions:
+    title: Взаимодействия
+    entity: component
+  interactions.example:
+    title: Примеры взаимодействий
+    entity: component
+  interactions.example.dochub:
+    title: Примеры взаимодействий DocHub
+    entity: component
+  interactions.example.dochub.customer:
+    title: Клиент
+    entity: actor
+  interactions.example.habr:
+    title: Хабр
+    entity: component
+  interactions.example.habr.articles:
+    title: Статьи
+    entity: component
+
+contexts:
+  interactions:
+    title: Контекст для отображения объектов вовлеченных во взаимодействие
+    components:
+      - interactions
+      - interactions.**

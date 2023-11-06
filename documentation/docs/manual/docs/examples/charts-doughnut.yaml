@@ -1,0 +1,21 @@
+docs:
+  dochub.charts.examples.doughnut:
+    description: Пример использования Кольцевой диаграммы
+    author: V.Markin
+    type: chart-doughnut
+    labels:
+      - VueJs
+      - EmberJs
+      - ReactJs
+      - AngularJs
+    source: >
+      (
+        {
+          'datasets': [
+            {
+              'color': ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
+              'data': [40, 20, 80, 10]
+            }
+          ]
+        }
+      )

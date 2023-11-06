@@ -10,3 +10,4 @@ imports:  # Подключение манифестов
 components:
   dochub: # Корневой компонент (домен)
     title: DocHub
+    entity: component

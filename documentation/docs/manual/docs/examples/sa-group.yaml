@@ -11,6 +11,7 @@ nodes:
   third-level.second-level.first-level.application:
     title: AndroidApp
     symbol: system
+    tag: app
 
   # Второй уровень
   third-level.second-level:

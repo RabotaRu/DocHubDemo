@@ -2,6 +2,8 @@
 entities:
   components:
     title: Компоненты
+    config:
+      root_menu: Архитектура  # Корневое меню представления компонентов
     description: >
       Архитектурные компоненты.
     schema:
@@ -89,7 +91,7 @@ entities:
         [
           {
             "link": "/entities/components/tree",
-            "location": "Архитектура"
+            "location": entities.components.config.root_menu
           }
         ]
       )

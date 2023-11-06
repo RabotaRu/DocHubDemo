@@ -66,7 +66,7 @@ props: {
 
 Пример встраивания документа в [markdown](/docs/dochub.markdown):
 
-```Markdown
+```
 ![Пример документа плагина](@document/dochub.plugins.example?param1=foo1&param2=foo2)
 ```
 

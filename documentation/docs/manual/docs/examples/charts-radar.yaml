@@ -1,0 +1,30 @@
+docs:
+  dochub.charts.examples.radar:
+    description: Пример использования диаграммы Радар
+    author: V.Markin
+    type: chart-radar
+    size: 400
+    origin: dochub.charts.examples.radar
+    source: ($)
+
+datasets:
+  dochub.charts.examples.radar:
+    source: >
+      (
+        {
+          'size': 600,
+          'labels': ['доступность', 'производительность', 'надежность', 'сопровождаемость', 'обслуживаемость', 'безопасность'],
+          'datasets': [
+            {
+                "label": "Система 3",
+                "color": "magenta",
+                "data": [10, 20, 30, 40, 50, 60]
+            },
+            {
+                "label": "Система 4",
+                "color": "green",
+                "data": [95, 85, 75, 65, 55, 45]            
+            }
+          ]
+        }
+      )

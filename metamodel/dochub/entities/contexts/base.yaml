@@ -74,11 +74,12 @@ entities:
       additionalProperties: false
     menu: >
       (
+        $root_menu := entities.contexts.config.root_menu;
         $presentation := entities.contexts.config.defaultPresentation;
         $append([
             {
                 "title": "Контексты",
-                "location": 'Архитектура/Контексты',
+                "location": $root_menu,
                 "icon": 'location_searching',
                 "link": "entities/contexts/tree"
             }
@@ -87,7 +88,7 @@ entities:
               /* Если указана явно презентация, используем ее */
               $presentation := $.*.presentation ? *.presentation : $presentation;
               *.location ? {
-                  "location": "Архитектура/Контексты/" & *.location,
+                  "location": $root_menu & "/" & *.location,
                   "link": "entities/contexts/" & $presentation & "?dh-context-id=" & $keys()[0]
               }
           )
@@ -97,6 +98,8 @@ entities:
     config:
       # Идентификатор презентации по умолчанию
       defaultPresentation: plantuml # plantuml / smartants
+      # Размещение контекстов в меню
+      root_menu: Архитектура/Контексты    
     # Общие API функции для генерирования контекста
     api:
       # Возвращает компоненты входящие в контекст

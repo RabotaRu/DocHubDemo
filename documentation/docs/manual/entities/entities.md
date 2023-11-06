@@ -115,9 +115,6 @@ entities:
         # Сообщаем, что перечисленные поля обязательны
         required:
           - title
-          - triggers
-          - results
-          - steps
 ```
 
 Теперь DocHub знает как должна быть описана структура в секции "interactions" и может подсказывать при вводе кода 
@@ -164,7 +161,7 @@ entities:
           # Источник данных для представления
           source: >       # Источник данных для рендера шаблона. Возвращает объект "interactions" по идентификатору переданному в параметрах.
               (
-                  $lookup(interactions, $params.id)
+                  $lookup(interactions, $params.id) ~> | steps | {"from": $lookup($$.components, from).title, "to": $lookup($$.components, to).title}|
               )
       ...
 ```
@@ -233,7 +230,7 @@ end
 Теперь есть возможность увидеть представление в работе. Для этого в markdown документ необходимо встроить представление
 нашего объекта. 
 
-```markdown
+```
 ![](@entity/interactions/blank?id=dochub.user)
 ```
 
@@ -246,7 +243,7 @@ end
 
 Встраиваем ее в markdown документ:
 
-```markdown
+```
 ![](@entity/interactions/tree)
 ```
 
@@ -663,14 +660,14 @@ interactions:
     results:
       - Переход в репозиторий
     steps:
-      - from: Хабр
-        to: Клиент
+      - from: habr
+        to: dochub.customer
         value: Анализ новых статей
-      - from: Клиент
-        to: Хабр
+      - from: dochub.customer
+        to: habr
         value: Чтение статьи о DocHub
-      - from: Клиент
-        to: Репозиторий
+      - from: dochub.customer
+        to: dochub.gitlab.repository
         value: Переход в репозиторий
   ...
 ```
@@ -687,18 +684,18 @@ interactions:
     results:
       - Потенциальный клиент (лид)
     steps:
-      - from: Клиент
-        to: Статьи
+      - from: dochub.customer
+        to: habr.articles
         value: Получение информации о DocHub
-        sub-interactions: dochub.customer.promotion.article # Здесь ссылка на взаимодействие пользователя со статьями на Хабр
-      - from: Клиент
-        to: Репозиторий
+        sub-interactions: dochub.customer.promotion.article # Здесь ссылка на взаимодействие пользователя со статьями
+      - from: dochub.customer
+        to: dochub.gitlab.repository
         value: Изучение инструкции
-      - from: Клиент
-        to: Репозиторий
+      - from: dochub.customer
+        to: dochub.gitlab.repository
         value: Развертывание
-      - from: Клиент
-        to: DocHub
+      - from: dochub.customer
+        to: dochub
         value: Первый опыт
   ...
 ```

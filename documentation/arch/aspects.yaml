@@ -10,9 +10,6 @@ aspects: # Архитектурные аспекты
   dochub.git:
     title: Git
     location: DocHub/Git
-  dochub.git.test.pest.kwest:
-    title: Git
-    location: DocHub/Git
   dochub.git.client:
     title: Развитие репы
     location: DocHub/GitLab/Git-клиент

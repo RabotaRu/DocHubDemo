@@ -35,7 +35,7 @@ nodes:
     symbol: database
 links:           
   # Внешняя среда         
-  - from: outside.user         # Модифицируем идентификаторы в связях      
+  - from: outside.user         # Модифицируем идентификаторы в связях  
     to: outside.application            
     style: "<->"    
 

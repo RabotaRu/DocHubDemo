@@ -228,7 +228,8 @@ docs:
 
 Содержимое файла "examples/example.html":
 
-```html
+```
+
 <H1>Привет!</H1>
 <P>Это простейший пример HTML-документа, который выводится с использованием плагина DocHub.</P>
 ```
@@ -241,13 +242,13 @@ docs:
 
 Для встраивания объектов DocHub в представления используйте специальный VUE компонент "dochub-object":
 
-```html
+```
 <dochub-object src="@document/dochub.example.swgr" />
 ```
 
 Параметры для встраиваемого объекта передаются как GET параметры URL в поле "src". Например:
 
-```html
+```
 <dochub-object src="@entity/interactions/blank?id=dochub.user.research" />
 ```
 

@@ -1,0 +1,17 @@
+docs:
+  dochub.charts.examples.pie:
+    description: Пример использования Круговой диаграммы
+    author: V.Markin
+    type: chart-pie
+    source: >
+      (
+        {
+          'labels': ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
+          'datasets': [
+            {
+              'color': ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
+              'data': [40, 20, 80, 10]
+            }
+          ]
+        }
+      )

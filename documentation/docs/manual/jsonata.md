@@ -150,6 +150,72 @@ $merge([
 ]
 ```
 
+В фукнцию может быть передана схема с использованием $rels (см. [entities](/entities/docs/blank?dh-doc-id=dochub.flex_metamodel.entities))
+```json
+    /* Создаём валидатор */
+    $validator := $jsonschema({
+      "type": "object",
+        "properties": {
+            "foo": { "$ref": "#/$rels/customer.foo" },
+            "bar": { "type": "string"}
+        },
+        "$rels": {
+            "customer.foo": {
+                "type": "string",
+                "enum": ["foo", "dochub.foo"]
+            }
+        }
+    });
+
+    /* Проверяем структуру */
+    $validator({
+      "foo": "error",
+      "bar": "abc"
+    });
+```
+
+Результат:
+```json
+ [
+    {
+        "instancePath": "/foo",
+        "schemaPath": "#/$rels/customer.foo/enum",
+        "keyword": "enum",
+        "params": {
+            "allowedValues": [
+                "foo",
+                "dochub.foo"
+            ]
+        },
+        "message": "must be equal to one of the allowed values"
+    }
+]
+```
+
+### $manifestschema()
+
+Сигнатура: $manifestschema()
+
+Возвращает json schema всего манифеста.
+
+Пример использования для валидации всех объектов в озере данных:
+
+```json
+    /* получаем схему */
+    $schema := $manifestschema();
+        
+    /* Создаём валидатор */
+    $validator := $jsonschema($schema);
+
+    /* Проверяем структуру */
+    $validator($);
+```
+
+Результат, если ошибок нет:
+```json
+    true
+```
+
 ## Дополнительные переменные
 
 ### $self

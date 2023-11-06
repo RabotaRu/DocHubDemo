@@ -2,6 +2,9 @@
 entities:
   aspects:
     title: Аспекты
+    # Параметры использования аспектов
+    config:
+      root_menu: Архитектура/Аспекты    # Размещение аспектов в меню
     description: >
       Архитектурные аспекты.
     schema:
@@ -44,6 +47,7 @@ entities:
     menu: >
       (
         $aspects := aspects;
+        $config := entities.aspects.config;
         $makeLocation := function($id) {(
             $arrleft := function($arr ,$count) {
                 $map($arr, function($v, $i) {
@@ -51,13 +55,13 @@ entities:
                 })
             };
             $domains := $split($id, ".");
-            "Архитектура/Аспекты/" & $join($map($domains, function($domain, $index) {(
+            $config.root_menu & "/" & $join($map($domains, function($domain, $index) {(
                 $lookup($aspects, $join($arrleft($domains, $index), ".")).title
             )}), "/");
         )};
         [$append([{
             "link": "/entities/aspects/tree", /* Ссылка на форму представления аспектов в виде дерева */
-            "location": "Архитектура/Аспекты" /* Расположение в меню */
+            "location": $config.root_menu     /* Расположение в меню */
           }],
           [$aspects.$spread().{
               "link": "/entities/aspects/blank?dh-aspect-id=" & $keys()[0],     /* Формируем ссылку на карточку */
