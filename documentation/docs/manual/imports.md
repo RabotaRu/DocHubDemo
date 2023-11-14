@@ -48,6 +48,12 @@ components:
 ```
 
 Подключение дополнительных манифестов возможно из сторонних репозиториев **того же** инстанса GitLab,
-а также с web-ресурсов по http/https протоколу. 
+а также с web-ресурсов по http/https протоколу. Например:
+
+```yaml
+imports:
+  - https://dochub.info/documentation/root.yaml
+  - gitlab:43847396:master@root.yaml
+```
 
 [Далее](/docs/dochub.components)
