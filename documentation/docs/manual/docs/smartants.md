@@ -203,6 +203,43 @@ config:
 Результат на примере сложной диаграммы:
 ![Результат на примере сложной диаграммы](@document/dochub.smartants.examples.complex.hidetitles)
 
+## Управление сеткой расположения элементов
+
+По умолчанию элементы SmartAnts располагаются на холсте произвольно. 
+Благодаря конфигурации сетки и разметке элементов тегами можно управлять расположением объектов
+Например:
+
+```yaml
+...
+config:
+  grid:
+    - row: 
+      - col: app
+      - col: user
+    - row:
+      - col: default
+...
+nodes:
+  # Первый уровень
+  third-level.second-level.first-level:
+    title: 1-ый уровень
+    tag: default
+  third-level.second-level.first-level.user:
+    title: Пользователь
+    symbol: user
+  third-level.second-level.first-level.application:
+    title: AndroidApp
+    symbol: system
+    tag: app
+
+  # Второй уровень
+  third-level.second-level:
+    title: 2-ой уровень
+    tag: user
+...
+```
+Получаем такую схему:
+![Получаем такую схему](@document/dochub.smartants.examples.gravity)
 
 ## Анимированные сценарии
 

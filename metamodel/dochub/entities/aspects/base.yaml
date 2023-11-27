@@ -63,9 +63,11 @@ entities:
             "link": "/entities/aspects/tree", /* Ссылка на форму представления аспектов в виде дерева */
             "location": $config.root_menu     /* Расположение в меню */
           }],
-          [$aspects.$spread().{
+          [$aspects.$spread().(          
+            *.location ? {
               "link": "/entities/aspects/blank?dh-aspect-id=" & $keys()[0],     /* Формируем ссылку на карточку */
               "location": $makeLocation($keys()[0])                             /* Формируем расположение в меню */
-          }][location]
+            }
+          )][location]
         )];
       )
