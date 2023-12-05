@@ -115,4 +115,3 @@
 
 ![Документ](@document/dochub.example.network)
 
-[Далее](/docs/dochub.swagger)

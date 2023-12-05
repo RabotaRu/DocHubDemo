@@ -723,6 +723,6 @@ interactions:
 
 ![](@entity/interactions/blank?id=dochub.customer.deployment)
 
-[Далее](/docs/dochub.radar)
+
 
 

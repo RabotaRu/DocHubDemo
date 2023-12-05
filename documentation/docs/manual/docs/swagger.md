@@ -50,4 +50,3 @@ paths:
 ![Swagger контракт](@document/dochub.example.swgr)
 
 
-[Далее](/docs/dochub.asyncapi)

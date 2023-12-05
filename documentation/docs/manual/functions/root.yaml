@@ -1,0 +1,12 @@
+imports:
+  - example.yaml
+docs:
+  dochub.functions:
+    location: DocHub/Руководство/Функции
+    description: Пользовательские функции
+    type: markdown
+    subjects:
+      - dochub.front
+      - dochub.front.spa
+      - dochub.front.backend
+    source: functions.md

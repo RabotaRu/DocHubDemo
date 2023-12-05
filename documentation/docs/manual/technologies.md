@@ -53,4 +53,3 @@ links:
 
 ![Карточка технологии](@technology/JavaScript)
 
-[Далее](/docs/dochub.forms)

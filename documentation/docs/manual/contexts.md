@@ -169,4 +169,3 @@ contexts:   # Контексты представления архитектур
 
 ![Компоненты в которых эксперт R.Piontik](@context/dochub.custom)
 
-[Далее](/docs/dochub.aspects)

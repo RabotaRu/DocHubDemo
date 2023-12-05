@@ -264,6 +264,5 @@ docs:
     }
 ```
 
-[Далее](/docs/dochub.inheritance)
 
 

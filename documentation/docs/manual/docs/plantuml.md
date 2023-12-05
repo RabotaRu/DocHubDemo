@@ -26,4 +26,3 @@
 
 ![Документ](@document/dochub.example.pml)
 
-[Далее](/docs/dochub.mermaid)

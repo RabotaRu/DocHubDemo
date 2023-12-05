@@ -218,7 +218,7 @@ npm run build
 docs:
 ...
   dochub.plugins.example:
-    location: DocHub/Руководство/Плагины/Пример
+    location: DocHub/Руководство/Плагины/Примеры/HTML
     type: html
     source: examples/example.html
 ```

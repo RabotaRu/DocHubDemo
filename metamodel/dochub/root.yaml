@@ -7,7 +7,7 @@ $package:
     # Описание
     description: Облегченная метамодель для описания прикладного слоя
     # Версия
-    version: 3.8.0
+    version: 4.1.0
     
 # Базовая метамодель DocHub. Включает в себя сущности
 #   components  - Архитектурные компоненты. 
@@ -21,3 +21,4 @@ $package:
 imports:
   - entities/root.yaml
   - rules/root.yaml
+  - functions/root.yaml

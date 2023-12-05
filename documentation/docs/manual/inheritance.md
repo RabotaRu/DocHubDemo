@@ -74,5 +74,5 @@ docs:
 * [Источников данных](/docs/dochub.datasets);
 * [Аспектов](/docs/dochub.aspects).
 
-[Далее](/docs/dochub.rules)
+
 

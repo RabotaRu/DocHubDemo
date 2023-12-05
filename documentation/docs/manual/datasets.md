@@ -117,4 +117,4 @@ datasets:
 ![Зависимый источник](@document/dochub.table.multi_dependencies)
 
 
-[Далее](/docs/dochub.jsonata)
+

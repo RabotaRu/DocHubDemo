@@ -61,4 +61,3 @@ components:
 ![AsyncAPI контракт](@document/dochub.example.asyncapi)
 
 
-[Далее](/docs/dochub.markdown)

@@ -22,6 +22,7 @@ entities:
                 : $root_menu & "/" & *.location;
               *.location ? {
                   "location": $location,
+                  "order": *.order,
                   "link": "entities/docs/blank?dh-doc-id=" & $keys()[0]
               }
           )

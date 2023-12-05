@@ -359,4 +359,3 @@ components:
 ![OpenAPI по шаблону](@document/dochub.templates.openapi)
 
 
-[Далее](/docs/dochub.datasets) 

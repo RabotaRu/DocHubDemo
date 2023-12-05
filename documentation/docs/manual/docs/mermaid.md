@@ -41,4 +41,3 @@ Rel(SystemC, customerA, "Sends e-mails to")
 
 ![Документ](@document/dochub.example.mermaid)
 
-[Далее](/docs/dochub.network)

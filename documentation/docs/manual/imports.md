@@ -56,4 +56,4 @@ imports:
   - gitlab:43847396:master@root.yaml
 ```
 
-[Далее](/docs/dochub.components)
+

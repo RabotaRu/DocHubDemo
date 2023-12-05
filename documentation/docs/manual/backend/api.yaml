@@ -57,18 +57,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/JSONataResult'
-  /core/storage/reload?secret={reloadSecret}:
+  /core/storage/reload:
     put:
       tags:
       - DataLake
       summary: Выполняет запрос перезагрузки данным архитектуры
       parameters:
-        - in: path
-          name: reloadSecret
+        - in: query
+          name: secret
           description: secret для доступа к запросу. Указывается в .env переменной VUE_APP_DOCHUB_RELOAD_SECRET
           required: true
           schema:
-            $ref: '#/components/schemas/JSONataQuery'
+            type: string
           example: '12345'
       responses:
         "200":
@@ -142,6 +142,7 @@ paths:
           example: export
         - in: query
           name: id
+          required: true
           description: >
             Параметр передающийся в презентацию. Зависит от самой презентации.
             Будет доступен в презентации в $params.

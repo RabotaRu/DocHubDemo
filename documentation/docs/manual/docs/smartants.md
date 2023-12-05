@@ -37,7 +37,7 @@
           to: system            # Куда
           title: Логин и пароль # Описание маршрута
           style: "->"           # Направление маршрута <- / -> / <->
-          link: "/docs/dochub.plantuml" # Ссылка перехода при клике на надпись
+          link: "/docs/dochub.swagger" # Ссылка перехода при клике на надпись
         - from: system
           to: user
           title: JWT токен
@@ -72,7 +72,7 @@
           to: system            
           title: Логин и пароль 
           style: "-[#ff0000]->"         # Указывается цвет линии через RGB
-          link: "/docs/dochub.plantuml" 
+          link: "/docs/dochub.swagger" 
         - from: system
           to: user
           title: JWT токен
@@ -506,4 +506,4 @@ nodes:
 ![Пример сложного запроса к данным](@document/dochub.smartants.examples.complex-query)
 
 
-[Далее](/docs/dochub.templates) 
+

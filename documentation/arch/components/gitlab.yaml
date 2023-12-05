@@ -33,7 +33,7 @@ components:
     aspects:
       - dochub.manifest.storage  
   dochub.gitlab.oauth:
-    title: GitLab Аторизация
+    title: GitLab Авторизация
     entity: component
     aspects:
       - dochub.gitlab.auth
