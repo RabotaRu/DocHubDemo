@@ -3,7 +3,7 @@ contexts:
   #               Контекст-пример сервиса заказов
   #***********************************************************
   dochub.example:
-    title: Контектс-пример
+    title: Контекст-пример
     components:
       - dochub.examples.orders
       - dochub.examples.payment

@@ -19,7 +19,41 @@ docs:
       head1:
         type: test
     source: examples/example.html
+
+  dochub.plugins.svg_file:
+    title: Пример использования SVG
+    type: svg
+    template: templates/test.svg
+    source: >
+      (
+        {
+          "component1": "Название компонента 1",
+          "line1_text1": "Текст для стрелки"
+        }
+      )
+
+  dochub.plugins.svg_file_error:
+    title: Проверка svg
+    type: svg
+    template: templates/test.svg
+    source: >
+      (
+        {
+          "component1": "Название компонента 1",
+
+          /* Намеренно допускаем ошибки             */
+          /* Описываем несуществующие параметры     */
+          /* и не указываем необходимые line1_text1 */
+          "component2": "Название компонента 2" 
+        }
+      )
+
+  dochub.plugins.svg_inline:
+    title: Проверка вставки svg объекта
+    type: markdown
+    source: svg_inline.md
+    location: DocHub/Руководство/Плагины/Примеры/SVG
+
   dochub.plugins.devtool_new:
     location: DocHub/Руководство/Плагины/Примеры/DevTool
     type: devtool
- 

@@ -69,6 +69,12 @@ animation:
     hello:                            # Идентификатор действия
     - action: info                    # Информировать пользователя. Доступны: clean / info / focus-node / focus-neighbors
       text: Давай я объясню как здесь все устроено   # Текст, который будет выводиться пользователю
+    focus-link:
+    - action: focus-link
+      from: outside.user
+      to: outside.application
+    - action: info
+      text: Для этого он использует наше приложение для Android
     focus-user:                           
     - action: focus-node              # Установить фокус на объекте диаграммы
       target: outside.user            # RegEx выражение определяющее с какими идентификаторами будут выделены элементы диаграммы
@@ -141,7 +147,7 @@ animation:
         delay: 2000
         voice: true
       - action: clean
-      - action: focus-frontend
+      - action: focus-link
         delay: 2000
         voice: true
       - action: clean

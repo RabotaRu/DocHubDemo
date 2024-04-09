@@ -152,9 +152,9 @@ paths:
       
       responses:
         "200":
-          description: "Массив обнаруженных проблем"
+          description: "Презентация сущности"
           content:
-            application/json:
+            application/xml:
               schema:
                 $ref: '#/components/schemas/ProblemsResult'
 components:
@@ -178,40 +178,57 @@ components:
     EntityParam:
       type: string
     ProblemsResult:
-      type: array
-      items:
-        type: object
-        properties:
-          id:
-            type: string
-            title: Идентификатор валидатора.
-          title:
-            type: string
-            title: Описание валидатора.
-          items:
-            type: array
-            title: Выявленные проблемы.
-            items:
+      type: object
+      properties:
+        process:
+          type: object
+          properties:
+            startEvent:
               type: object
+              title: Просмотр архитектуры
               properties:
-                uid:
+                outgoing:
                   type: string
-                  title: Уникальный идентификатор ошибки. 
-                title:
-                  type: string
-                  title: Краткие сведения о нарушении.
-                location:
-                  type: string
-                  title: URL с расположением объекта, где выявлена ошибка.
-                correction:
-                  type: string
-                  title: Краткое пояснение, как исправить ошибку.
-                description:
-                  type: string
-                  title: Описание причины ошибки.
-                cause:
-                  type: string
-                  title: Идентификатор или URL документа, на основании которого создан валидатор.
               required:
-                - uid
-                - title
+                - outgoing
+            task:
+              type: array
+              title: Вход на портал
+              items:
+                - type: object
+                  properties:
+                    incoming:
+                      type: string
+                    outgoing:
+                      type: string
+                  required:
+                    - incoming
+                    - outgoing
+                - type: object
+                  properties:
+                    incoming:
+                      type: string
+                    outgoing:
+                      type: string
+                  required:
+                    - incoming
+                    - outgoing
+            sequenceFlow:
+              type: array
+              items:
+                - type: string
+            exclusiveGateway:
+              type: object
+              title: Информация о существующей архитектуре
+              properties:
+                incoming:
+                  type: string
+              required:
+                - incoming
+          required:
+            - startEvent
+            - task
+            - sequenceFlow
+            - exclusiveGateway
+      required:
+        - process
