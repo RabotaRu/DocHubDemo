@@ -114,6 +114,18 @@ docs:
       - dochub.front.spa.blank
       - dochub.front.spa.blank.doc
     source: charts.md
+  dochub.bpmn:
+    location: DocHub/Руководство/Документы/BPMN
+    description: BPMN диаграммы
+    autor: R.Piontik
+    type: markdown
+    subjects:
+      - dochub.front
+      - dochub.front.spa
+      - dochub.front.spa.blank
+      - dochub.front.spa.blank.doc
+    source: bpmn.md
+
   # *****************************************  
   #            Примеры документов
   # *****************************************  
@@ -383,6 +395,14 @@ docs:
       - dochub.front.spa.blank
       - dochub.front.spa.blank.doc
     source: examples/asyncapi.yaml
+  dochub.example.bpmn:
+    location: DocHub/Руководство/Документы/BPMN/Простой пример
+    type: bpmnjs
+    source: examples/bpmn.xml
+  dochub.example.bpmn_full:
+    location: DocHub/Руководство/Документы/BPMN/Расширенный пример
+    type: bpmnjs
+    source: examples/pizza-collaboration.xml
   # *****************************************  
   #                 Шаблоны
   # *****************************************  
