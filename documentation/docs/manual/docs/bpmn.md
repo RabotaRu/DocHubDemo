@@ -87,5 +87,38 @@
 ![Редактирование BPM диаграмм в IDEA](https://youtu.be/qQzsHuYxNzg)
 
 
+## Анализ процессов
 
+DocHub может обращаться к описанию процессов в XML формате аналогично YAML и JSON. Для этого необходимо указать XML
+файл как источник данных. Например, рассмотрим анализ процесса:
 
+![BPMN](@document/dochub.example.bpmn.full)
+
+Выявим реестр задач определенных в процессе и выразим его в таблице:
+
+```yaml
+docs:
+  ...
+  dochub.example.bpmn.analyse:
+    origin: examples/pizza-collaboration.xml  # Указываем источником оригинальных данных XML файл
+    source: >                                 # Обрабатываем XML
+      (
+          [$."semantic:definitions"."semantic:process"."semantic:task"."$"]
+      )
+    type: table                               # Тип документа "таблица"
+    headers:                                  # Заголовки таблицы
+      - value: id
+        text: Идентификатор
+        sortable: true
+        align: left
+        width: 20%
+      - value: name
+        text: Название задачи
+        sortable: true
+        align: left
+  ...
+```
+
+Результат:
+
+![BPMN](@document/dochub.example.bpmn.analyse)

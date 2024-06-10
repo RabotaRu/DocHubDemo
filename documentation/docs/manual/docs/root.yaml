@@ -399,10 +399,28 @@ docs:
     location: DocHub/Руководство/Документы/BPMN/Простой пример
     type: bpmnjs
     source: examples/bpmn.xml
-  dochub.example.bpmn_full:
+  dochub.example.bpmn.full:
     location: DocHub/Руководство/Документы/BPMN/Расширенный пример
     type: bpmnjs
     source: examples/pizza-collaboration.xml
+  dochub.example.bpmn.analyse:
+    origin: examples/pizza-collaboration.xml  # Указываем источником оригинальных данных XML файл
+    source: >                                 # Обрабатываем XML
+      (
+          [$."semantic:definitions".*."semantic:task"."$"]
+      )
+    type: table                               # Тип документа "таблица"
+    headers:                                  # Заголовки таблицы
+      - value: id
+        text: Идентификатор
+        sortable: true
+        align: left
+        width: 20%
+      - value: name
+        text: Название задачи
+        sortable: true
+        align: left
+
   # *****************************************  
   #                 Шаблоны
   # *****************************************  
