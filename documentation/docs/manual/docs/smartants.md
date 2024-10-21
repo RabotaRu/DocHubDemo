@@ -186,7 +186,13 @@ config:
 ![Результат на примере сложной диаграммы](@document/dochub.smartants.examples.complex.hideleaves)
 
 **hideTitle** - индивидуально выключить заголовок у элемента или области:
+Рамку для областей можно отключить параметром - **hideBorder**:
 ```yaml
+...
+  # Внешняя среда
+  outside:
+    title: Внешняя среда
+    hideBorder: true
 ...
   # Внутренняя среда
   inside:

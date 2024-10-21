@@ -130,6 +130,11 @@ docs:
       subjects:
         - dochub.front
       source: config/deployment.md
+    dochub.rules:
+      location: DocHub/Руководство/Ролевая модель
+      description: Ролевая модель
+      type: markdown
+      source: entities/rules.md
     dochub.context.source:
       type: plantuml
       source: context_source.puml

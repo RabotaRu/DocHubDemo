@@ -8,6 +8,22 @@ contexts:   # Контексты представления архитектур
             - dochub.plantuml
             - dochub.gitlab
             - dochub.web
+    dochub.uml_options:                     
+        title: Демонстрация UML опций контекста
+        uml:
+            $before: >                      # Добавляем легенду в контекст
+                legend top left
+                    Легенда, которая будет выводиться
+                    вне зависимости от результата работы контекста
+                end legend
+            $after: >                       # Добавляем произвольный компонент в диаграмму
+                component "Произвольный компонент" as test 
+        components:                         # Компоненты входящие в контекст
+            - dochub.front
+            - dochub.user
+            - dochub.plantuml
+            - dochub.gitlab
+            - dochub.web
     dochub.front:
         title: Контейнерная архитектура DocHub
         location: DocHub/Контейнерная архитектура

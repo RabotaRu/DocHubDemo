@@ -44,7 +44,7 @@ links:
   # Внешняя среда         
   - from: outside
     to: third-level
-    style: "<->" 
+    style: "*-*" 
   - from: outside.customer
     to: third-level.manager
     style: "<->" 

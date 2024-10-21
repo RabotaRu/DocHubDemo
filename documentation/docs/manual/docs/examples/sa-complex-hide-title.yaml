@@ -5,6 +5,7 @@ nodes:
   # Внешняя среда
   outside:
     title: Внешняя среда
+    hideBorder: true
   outside.user:                # Пользователь
     title: Пользователь
     symbol: user
